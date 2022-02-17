@@ -11,3 +11,9 @@ paths:
     - PHP TEST
   "**.html":
     - HTML TEST
+  "**.js":
+    - JS ROOT
+  "/Subfolder/**.js":
+    - JS Subfolder
+
+
