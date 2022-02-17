@@ -11,3 +11,5 @@ jobs:
         uses: wyozi/contextual-qa-checklist-action@master
         with:
           gh-token: ${{ secrets.GITHUB_TOKEN }}
+          comment-header: "Testing header"
+          comment-footer: "testing footer"
