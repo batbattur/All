@@ -7,7 +7,7 @@ paths:
     - Did you check that the component visual look still matches design documents?
   "docs/**":
     - Did you run changes past the copywrite team?
-  "Test1/Admin/**/**.php":
+  "Test1/Admin/**.php":
     - PHP changes were added. Make sure you test the php files.
   "**.html":
     - HTML TEST
