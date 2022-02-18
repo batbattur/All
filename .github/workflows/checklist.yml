@@ -15,4 +15,5 @@ jobs:
         uses: wyozi/contextual-qa-checklist-action@1.2
         with:
           gh-token: ${{ secrets.GITHUB_TOKEN }}
+          input-file: 'ChecklistFolder/QAchecklist.yml'
           comment-header: "Hey, by the way, we noticed the following changes:"
