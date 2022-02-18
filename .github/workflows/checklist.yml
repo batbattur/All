@@ -11,7 +11,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Checklist  
-        uses: wyozi/contextual-qa-checklist-action@master
+        uses: wyozi/contextual-qa-checklist-action@1.2
         with:
           gh-token: ${{ secrets.GITHUB_TOKEN }}
           comment-header: "Hey, by the way, we noticed the following changes."
