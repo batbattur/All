@@ -1,3 +1,4 @@
+name: QA Checklist
 on: pull_request
 
 jobs:
