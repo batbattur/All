@@ -13,7 +13,7 @@ paths:
     - HTML TEST
   "**.js":
     - JS ROOT
-  "/Subfolder/**.js":
+  "Subfolder/**.js":
     - JS Subfolder
 
 
