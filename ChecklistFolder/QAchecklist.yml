@@ -8,8 +8,7 @@ paths:
   "docs/**":
     - Did you run changes past the copywrite team?
   "Test1/Admin/**.php":
-    - PHP changes were added
-    Make sure you test the php files.
+    - PHP changes were added. Make sure you test the php files.
   "**.html":
     - HTML TEST
   "**.js":
