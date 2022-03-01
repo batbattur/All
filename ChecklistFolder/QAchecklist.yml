@@ -1,19 +1,20 @@
-paths:
-  "README.md":
-    - Did you remember to add code examples for newly added methods?
-    - Did you make sure that all the example code still functions as expected?
-    - Did you remember to update screenshots to match new updates?
-  "src/components/**.js":
-    - Did you check that the component visual look still matches design documents?
-  "docs/** | docs1/**":
-    - Did you run changes past the copywrite team?
-  "Testing/**/**.php":
-    - PHP changes were added. Make sure you test the php files.
-  "**.html":
-    - HTML TEST
-  "**.js":
-    - JS ROOT
-  "Subfolder/**.js":
-    - JS Subfolder
-
-
+store:
+  "paths":
+    - "Store/**.js"
+    - "Cart/**.html"
+  "description":
+    - Please check the following store pages (general)
+  "items":
+    - Store checklist 1
+    - Store checklist 2
+    - Store checklist 3
+blog:
+  "paths":
+    - "Blog/**.php"
+    - "Blogger/**.ts"
+  "description":
+    - Please check the following blog pages (general)
+  "items":
+    - Blog checklist 1
+    - Blog checklist 2
+    - Blog checklist 3
