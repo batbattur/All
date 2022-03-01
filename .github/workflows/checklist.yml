@@ -15,5 +15,5 @@ jobs:
         uses: batbattur/contextual-qa-checklist-action@69aa588807d6b71c7e4224c12461a4e0070af2e6
         with:
           gh-token: ${{ secrets.GITHUB_TOKEN }}
-          input-file: 'ChecklistFolder/QAchecklist.yml'
+          input-file: '.github/QAchecklist.yml'
           comment-header: "Hey, by the way, we noticed the following changes:"
