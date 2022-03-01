@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Checklist  
-        uses: batbattur/contextual-qa-checklist-action@8c9214fc86621bcd5a76e296d56fa6bb4ca059e2
+        uses: batbattur/contextual-qa-checklist-action@200ae051f19be4305e1ebdc08a3a3b8f56a548d1
         with:
           gh-token: ${{ secrets.GITHUB_TOKEN }}
           input-file: 'ChecklistFolder/QAchecklist.yml'
