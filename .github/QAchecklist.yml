@@ -18,3 +18,11 @@ blog:
     - Blog checklist 1
     - Blog checklist 2
     - Blog checklist 3
+test:
+  "paths":
+    - "**.java"
+  "description":
+    - Please check the following test files
+  "items":
+    - Test checklist 1
+    - Test checklist 2
