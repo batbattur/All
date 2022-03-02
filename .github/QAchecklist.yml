@@ -6,7 +6,7 @@ store:
     - Please check the following store pages (general)
   "items":
     - Store checklist 1 - https://www.google.com/
-    - Store checklist 2
+    - <a href="http://testing.test123.org/xx3/landing.gsp">Store checklist 2</a>
     - Store checklist 3
 blog:
   "paths":
