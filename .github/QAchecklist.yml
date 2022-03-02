@@ -5,7 +5,7 @@ store:
   "description":
     - Please check the following store pages (general)
   "items":
-    - [Store checklist 1](https://www.google.com/)
+    - Store checklist 1: https://www.google.com/
     - Store checklist 2
     - Store checklist 3
 blog:
