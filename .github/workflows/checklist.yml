@@ -30,4 +30,4 @@ jobs:
           repo: request-action
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: "echo latest release: ${{ fromJson(steps.get_latest_release.outputs.data) }}"
+      - run: "echo latest release: ${{ fromJson(steps.get_latest_release.outputs.data).jobs.*.html_url }}"
