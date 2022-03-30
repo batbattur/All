@@ -25,5 +25,7 @@ jobs:
           repo: request-action
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          json_var: ${{ steps.get_latest_release.outputs.data }}
       - run: |
-          echo ${{ steps.get_latest_release.outputs.data }} | jq '.html_url'
+          echo $json_var | jq '.html_url'
+         
