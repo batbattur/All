@@ -25,7 +25,7 @@ jobs:
         uses: octokit/request-action@v2.x
         id: get_latest_release
         with:
-          route: GET /repos/{owner}/{repo}/actions/runs/{{ github.run_id }}/jobs
+          route: GET /repos/batBattur/All/actions/runs/${{github.run_id}}/jobs
           owner: octokit
           repo: request-action
         env:
