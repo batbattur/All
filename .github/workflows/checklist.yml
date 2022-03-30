@@ -16,9 +16,9 @@ jobs:
           comment-header: "Hey, by the way, we noticed the following changes:"
       - name: Output Run ID
         run: echo ${{ github.run_id }}
-      - name: Testing Github API
+      - name: Get Action Run Info
         uses: octokit/request-action@v2.x
-        id: get_latest_release
+        id: get_action_run
         with:
           route: GET /repos/{owner}/{repo}/actions/runs/${{github.run_id}}/jobs
           owner: batbattur
@@ -26,11 +26,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Get job url
-        id: job_url_from_workflow
         run: |
-          echo $json_var | jq '.jobs | .[] | .html_url' | sed 's/?check_suite_focus=true//'
+          echo "WORKFLOW_JOB_URL=$(json_var | jq '.jobs | .[] | .html_url' | sed 's/?check_suite_focus=true//')" >> $GITHUB_ENV
         env:
-          json_var: ${{ steps.get_latest_release.outputs.data }}
+          json_var: ${{ steps.get_action_run.outputs.data }}
       - name: Print url
         run: |
-          echo ${{ steps.job_url_from_workflow.outputs}}
+          echo $WORKFLOW_JOB_URL
