@@ -29,6 +29,7 @@ jobs:
         id: job_url_from_workflow
         run: |
           echo "::set-output name=jobUrl::$json_var | jq '.jobs | .[] | .html_url' | sed 's/?check_suite_focus=true//'"
+          shell: bash
         env:
           json_var: ${{ steps.get_latest_release.outputs.data }}
       - name: Print url
