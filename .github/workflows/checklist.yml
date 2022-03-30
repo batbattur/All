@@ -27,7 +27,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Get job url
         run: |
-          testing123
           echo "WORKFLOW_JOB_URL=$(echo ${{ steps.get_action_run.outputs.data }} | jq '.jobs | .[] | .html_url' | sed 's/?check_suite_focus=true//')" >> $GITHUB_ENV
       - name: Print url
         run: |
