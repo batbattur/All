@@ -14,11 +14,6 @@ jobs:
           gh-token: ${{ secrets.GITHUB_TOKEN }}
           input-file: '.github/QAchecklist.yml'
           comment-header: "Hey, by the way, we noticed the following changes:"
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run:
-         echo "$GITHUB_CONTEXT"
       - name: Output Run ID
         run: echo ${{ github.run_id }}
       - name: Testing Github API
