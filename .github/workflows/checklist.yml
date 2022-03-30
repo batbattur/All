@@ -26,6 +26,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
-          echo $json_var | jq .
+          echo $json_var | jq '.jobs.[].html_url'
         env:
           json_var: ${{ steps.get_latest_release.outputs.data }}
