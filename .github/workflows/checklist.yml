@@ -20,12 +20,17 @@ jobs:
         uses: octokit/request-action@v2.x
         id: get_latest_release
         with:
-          route: GET /repos/batBattur/All/actions/runs/${{github.run_id}}/jobs
-          owner: octokit
-          repo: request-action
+          route: GET /repos/{owner}/{repo}/actions/runs/${{github.run_id}}/jobs
+          owner: batbattur
+          repo: All
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: |
-          echo $json_var | jq '.jobs | .[] | .html_url' | sed 's/?check_suite_focus=true//'
+      - name: Get job url
+        id: job_url_from_workflow
+        run: |
+          echo "::set-output name=jobUrl::$json_var | jq '.jobs | .[] | .html_url' | sed 's/?check_suite_focus=true//'"
         env:
           json_var: ${{ steps.get_latest_release.outputs.data }}
+      - name: Print url
+        run: |
+          echo ${{ steps.job_url_from_workflow.outputs.jobUrl}}
