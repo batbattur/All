@@ -21,4 +21,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
+      - name: Testing
+        run: |
+          echo ${{ github.job }}
