@@ -13,15 +13,20 @@ jobs:
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             GITHUB_JOB_NAME: ${{ github.job }}
-      - name: Testing
+      - name: Print job name
         run: |
           echo ${{ github.job }}
   testing_job1:
     runs-on: ubuntu-latest
-    name: Checklist1
+    name: Testlist
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v2
-      - name: Testing
+      - name: Set Environment Variables
+        uses: ./.github/actions/setup-ci-env-vars
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GITHUB_JOB_NAME: ${{ github.job }}
+      - name: Print job name
         run: |
           echo ${{ github.job }}
