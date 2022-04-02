@@ -23,5 +23,5 @@ runs:
       - name: Test
         run:
            | 
-           echo ${{ steps.get_action_job_url.outputs.job-url }}
+           echo "${{ steps.get_action_job_url.outputs.job-url }}"
         shell: bash
