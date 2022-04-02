@@ -22,7 +22,7 @@ runs:
         id: get_action_job_url
         run:
            | 
-           echo "::set-output name=job-url::$(echo $job_data_json | jq '.jobs | select(.first_name == ${{ env.GITHUB_JOB_NAME }})' | .html_url' | sed 's/?check_suite_focus=true//g')"
+           echo "::set-output name=job-url::$(echo $job_data_json | jq '.jobs | .[]? | select(.first_name == ${{ env.GITHUB_JOB_NAME }})' | .html_url' | sed 's/?check_suite_focus=true//g')"
         env:
            job_data_json: ${{ steps.get_action_job_data.outputs.data }}
         shell: bash
