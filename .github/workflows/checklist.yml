@@ -33,3 +33,10 @@ jobs:
       - name: Print url
         run: |
           echo $WORKFLOW_JOB_URL
+  checklist_job1:
+    runs-on: ubuntu-latest
+    name: Checklist1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
