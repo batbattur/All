@@ -21,7 +21,15 @@ runs:
         shell: bash
         
       - name: Print url
-        run: echo $url
+        run: 
+            |
+            echo $url
+            echo "$url"
+            echo "${{ env.GITHUB_JOB_NAME }}"
+            echo  ${{ steps.get_action_job_url.outputs.job-url }}
+            echo "${{ steps.get_action_job_url.outputs.job-url }}"
+            echo "testing"
+        
         env:
            url: ${{ steps.get_action_job_url.outputs.job-url }}
         shell: bash
