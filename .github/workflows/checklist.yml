@@ -12,6 +12,7 @@ jobs:
         uses: ./.github/actions/setup-ci-env-vars
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GITHUB_JOB_NAME: ${{ github.job }}
       - name: Testing
         run: |
           echo ${{ github.job }}
