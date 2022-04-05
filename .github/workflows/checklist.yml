@@ -2,7 +2,7 @@ name: QA
 on: pull_request
 
 jobs:
-  checklist_job:
+  checklist_job123:
     runs-on: ubuntu-latest
     name: checklist_job
     steps:
@@ -18,7 +18,7 @@ jobs:
           echo ${{ github.job }}
   testing_job1:
     runs-on: ubuntu-latest
-    name: testing_job1
+    name: TESTING
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
