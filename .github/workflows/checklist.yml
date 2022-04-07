@@ -1,5 +1,8 @@
 name: QA 
-on: [pull_request, workflow_run]
+on: 
+    pull_request: 
+    workflow_run:
+      workflows: [QA]
 
 jobs:
   checklist_job:
