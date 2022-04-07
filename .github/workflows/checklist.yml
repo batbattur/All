@@ -19,6 +19,10 @@ jobs:
           echo ${{ github.event.pull_request.updated_at }}
           echo ${{ github.workflow_job }}
           echo ${{ github.workflow_job.started_at }}
+          echo "$GITHUB_CONTEXT"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+    
   testing_job1:
     runs-on: ubuntu-latest
     name: testing_job1
