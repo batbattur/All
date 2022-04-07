@@ -19,6 +19,8 @@ jobs:
           echo ${{ github.event.pull_request.updated_at }}
           echo ${{ github.event.workflow_job }}
           echo ${{ github.event.workflow_job.started_at }}
+          echo ${{ github.event	 }}
+          echo ${{ workflow_job }}
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
     
