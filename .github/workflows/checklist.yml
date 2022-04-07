@@ -20,10 +20,9 @@ jobs:
           echo ${{ github.event.workflow_job }}
           echo ${{ github.event.workflow_job.started_at }}
           echo $TESTING_HERE
-          echo ${{ github.action }}
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-          TESTING_HERE: ${{ toJson(github.event) }}
+          TESTING_HERE: ${{ toJson(job) }}
     
   testing_job1:
     runs-on: ubuntu-latest
