@@ -15,7 +15,7 @@ runs:
         id: get_action_job_url
         run:
            | 
-           TESTING=$(echo $job_data_json | jq '.jobs | .[]? | select(.name == "${{ env.GITHUB_JOB_NAME }}"))
+           TESTING=$(echo $job_data_json | jq '.jobs | .[]? | select(.name == "${{ env.GITHUB_JOB_NAME }}")')")
            echo "::set-output name=job-url::$(echo $TESTING | jq '.html_url')"
            echo "::set-output name=job-start-time::$(echo $TESTING | jq '.started_at')"
 
