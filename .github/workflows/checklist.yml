@@ -41,5 +41,6 @@ jobs:
       - name: Print job name
         run: |
           echo ${{ github.job }}
+          echo ${{ github.job }}
           sleep 5m
         shell: bash
