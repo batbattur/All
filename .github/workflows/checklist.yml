@@ -22,6 +22,7 @@ jobs:
           echo ${{ github.event.pull_request.updated_at }}
           echo ${{ github.event.workflow_job }}
           echo ${{ github.event.workflow_job.started_at }}
+          echo ${{ github.ref }}
           sleep 5m
         shell: bash
         env:
