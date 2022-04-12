@@ -23,7 +23,7 @@ jobs:
           echo ${{ github.event.workflow_job }}
           echo ${{ github.event.workflow_job.started_at }}
           echo ${{ github.ref }}
-          sleep 5m
+          sleep 5s
         shell: bash
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -43,5 +43,5 @@ jobs:
         run: |
           echo ${{ github.job }}
           echo ${{ github.job }}
-          sleep 5m
+          sleep 5s
         shell: bash
