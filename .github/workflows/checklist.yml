@@ -22,7 +22,8 @@ jobs:
           echo ${{ github.event.pull_request.updated_at }}
           echo ${{ github.event.workflow_job }}
           echo ${{ github.event.workflow_job.started_at }}
-
+          sleep 5m
+        shell: bash
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
     
@@ -40,3 +41,5 @@ jobs:
       - name: Print job name
         run: |
           echo ${{ github.job }}
+          sleep 5m
+        shell: bash
