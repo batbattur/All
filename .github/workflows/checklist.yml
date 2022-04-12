@@ -1,10 +1,13 @@
 name: QA 
 on: pull_request
-
+concurrency: 
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   checklist_job:
     runs-on: ubuntu-latest
     name: checklist_job
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -19,7 +22,7 @@ jobs:
           echo ${{ github.event.pull_request.updated_at }}
           echo ${{ github.event.workflow_job }}
           echo ${{ github.event.workflow_job.started_at }}
-          echo "$GITHUB_CONTEXT"
+
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
     
