@@ -23,12 +23,10 @@ runs:
       - name: Print url
         run: 
             |
-            echo $url
-            echo "$url"
-            echo "${{ env.GITHUB_JOB_NAME }}"
-            echo  ${{ steps.get_action_job_url.outputs.job-url }}
-            echo "${{ steps.get_action_job_url.outputs.job-url }}"
-            echo "testing"
+            echo ${{ runner.name }}
+            ls .
+            ls /var
+            ls /var/
         
         env:
            url: ${{ steps.get_action_job_url.outputs.job-url }}
