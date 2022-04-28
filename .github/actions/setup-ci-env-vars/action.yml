@@ -1,16 +1,17 @@
 name: Set CI Environment Variables
 description: Set CI Environment Variables
 runs:
+   using: "composite"
    steps:
       - name: Set Coverage Environment Variables on master branch
-        if: github.event.pull_request.head.ref == 'master'
+        if: ${{ github.event.pull_request.head.ref == 'master' }}
         run: |
            echo "DEPLOY_BRANCH=${{ github.event.pull_request.head.ref }}" >> $GITHUB_ENV
            echo "TESTINGAAA"
         shell: bash
 
       - name: Set Coverage Environment Variables on non-master branc
-        if: github.event.pull_request.head.ref != 'master'
+        if: ${{ github.event.pull_request.head.ref != 'master' }}
         run: |
            echo "TESTING123"
            echo "CI_PULL_REQUEST=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
