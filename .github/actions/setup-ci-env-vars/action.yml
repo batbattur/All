@@ -7,7 +7,7 @@ runs:
            echo "DEPLOY_BRANCH=${{ github.event.pull_request.head.ref }}" >> $GITHUB_ENV
            echo "TESTINGAAA"
         shell: bash
-        if: github.event.pull_request.head.ref == 'master'
+        if: ${{ github.event.pull_request.head.ref }} == 'master'
 
       - name: Set Coverage Environment Variables on non-master branc
         run: |
@@ -16,5 +16,5 @@ runs:
            echo "OVERRIDE_BRANCH=${{ github.event.pull_request.head.ref }}" >> $GITHUB_ENV
            echo "OVERRIDE_COMMIT=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
         shell: bash
-       if: github.event.pull_request.head.ref != 'master'
+       if: ${{ github.event.pull_request.head.ref }} != 'master'
 
