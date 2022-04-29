@@ -12,7 +12,8 @@ runs:
         if: github.event.pull_request.head.ref != 'master'
         run: |
            echo "CI_PULL_REQUEST=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
-           echo "OVERRIDE_BRANCH=${{ github.event.pull_request.head.ref }}" >> $GITHUB_ENV
+           echo "OVERRIDE_BRANCH='${{ github.event.pull_request.head.ref }}'" >> $GITHUB_ENV
            echo "OVERRIDE_COMMIT=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
+           echo $OVERRIDE_BRANCH
         shell: bash
 
