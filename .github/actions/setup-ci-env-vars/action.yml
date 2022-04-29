@@ -18,8 +18,8 @@ runs:
            echo "OVERRIDE_BRANCH=${{ github.event.pull_request.head.ref }}" >> $GITHUB_ENV
            echo "OVERRIDE_COMMIT1='${{ github.event.pull_request.head.sha }}'" >> $GITHUB_ENV
            echo "OVERRIDE_COMMIT2=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
-           echo $OVERRIDE_COMMIT1
-           echo $OVERRIDE_COMMIT2
+           echo "commit1: $OVERRIDE_COMMIT1"
+           echo "commit2: $OVERRIDE_COMMIT2"
         shell: bash
 
 
