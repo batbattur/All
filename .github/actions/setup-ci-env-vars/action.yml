@@ -16,7 +16,10 @@ runs:
            echo "TESTING123"
            echo "CI_PULL_REQUEST=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
            echo "OVERRIDE_BRANCH=${{ github.event.pull_request.head.ref }}" >> $GITHUB_ENV
-           echo "OVERRIDE_COMMIT=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
+           echo "OVERRIDE_COMMIT1='${{ github.event.pull_request.head.sha }}'" >> $GITHUB_ENV
+           echo "OVERRIDE_COMMIT2=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
+           echo $OVERRIDE_COMMIT1
+           echo $OVERRIDE_COMMIT2
         shell: bash
 
 
