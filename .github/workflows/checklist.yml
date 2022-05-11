@@ -15,6 +15,18 @@ jobs:
 
       - name: Print job name
         run: |
+          echo "Before:"
+          echo ${{ github.event.push.before }}
+          echo "After:"
+          echo ${{ github.event.push.after }}
+          echo "head Commit:"
+          echo ${{ github.event.push.head_commit }}
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+    
+
+      - name: Print job name
+        run: |
           echo "$GITHUB_CONTEXT"
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
