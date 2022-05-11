@@ -19,10 +19,10 @@ jobs:
           echo ${{ github.event.before }}
           echo "After:"
           echo ${{ github.event.after }}
-          echo "head Commit:"
+          echo "heada Commit:"
           echo ${{ github.event.head_commit.id }}
-          echo ${{ github.event.commits.[0] }}
-          echo ${{ github.event.commits.[1] }}
+          echo ${{ github.event.commits[0] }}
+          echo ${{ github.event.commits[1] }}
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
     
