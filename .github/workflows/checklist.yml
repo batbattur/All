@@ -15,8 +15,10 @@ jobs:
 
       - name: Get head commit for push event
         run: |
-          echo "OVERRIDE_BRANCH=('${{ toJSON(github.event.commits) }}' | jq ".[length - 2].id")" >> $GITHUB_ENV
+          echo "OVERRIDE_BRANCH=(echo $COMMITS_JSON | jq ".[length - 2].id")" >> $GITHUB_ENV
         shell: bash
+        env: 
+          COMMITS_JSON: ${{ toJSON(github.event.commits) }}
 
       - name: Print job name
         run: |
