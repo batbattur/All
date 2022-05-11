@@ -13,6 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Get head commit for push event
+        run: |
+          echo "OVERRIDE_BRANCH=('${{ toJSON(github.event.commits) }}' | jq ".[length - 2].id")" >> $GITHUB_ENV
+        shell: bash
+
       - name: Print job name
         run: |
           echo "Before:"
@@ -24,7 +29,8 @@ jobs:
           echo ${{ github.event.commits[0].id }}
           echo '${{ toJSON(github.event.commits) }}' 
           echo '${{ toJSON(github.event.commits) }}' | jq ".[length - 2].id"
+          echo $NUM
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-          NUM: ${{ github.event.commits.length || echo '${{ toJSON(github.event.commits) }}' | jq ".[length - 2].id"}}
+          NUM: ${{ github.event.pull_request.head.sha || $OVERRIDE_BRANCH }}
         shell: bash
