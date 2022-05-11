@@ -23,7 +23,7 @@ jobs:
           echo ${{ github.event.head_commit.id }}
           echo ${{ github.event.commits[0].id }}
           echo '${{ toJSON(github.event.commits) }}' 
-          echo '${{ toJSON(github.event.commits) }}' | jq ".[length - 1].id"
+          echo '${{ toJSON(github.event.commits) }}' | jq ".[length - 2].id"
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
           NUM: ${{ github.event.commits.length }}
