@@ -20,7 +20,7 @@ jobs:
         env: 
           COMMITS_JSON: ${{ github.event.commits }}
 
-      - name: Print job name12
+      - name: Print job name
         run: |
           echo "Before:"
           echo ${{ github.event.before }}
