@@ -12,32 +12,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Set Environment Variables
-        uses: ./.github/actions/setup-ci-env-vars
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            GITHUB_JOB_NAME: ${{ github.job }}
+
       - name: Print job name
         run: |
-          echo ${{ github.job }}
-          echo ${{ github.event.pull_request.updated_at }}
-          echo ${{ github.event.workflow_job }}
-          echo ${{ github.event.workflow_job.started_at }}
           echo "$GITHUB_CONTEXT"
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
     
-  testing_job1:
-    runs-on: ubuntu-latest
-    name: testing_job1
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Set Environment Variables
-        uses: ./.github/actions/setup-ci-env-vars
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            GITHUB_JOB_NAME: ${{ github.job }}
-      - name: Print job name
-        run: |
-          echo ${{ github.job }}
