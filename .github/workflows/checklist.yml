@@ -23,7 +23,7 @@ jobs:
           echo ${{ github.event.head_commit.id }}
           echo ${{ github.event.commits[0].id }}
           echo ::set-env name=LAST_COMMIT_INDEX::$((${{ github.event.commits.length }}-1))
-          echo ${{ github.event.commits[LAST_COMMIT_INDEX].id }}
+          echo ${{ github.event.commits[$LAST_COMMIT_INDEX].id }}
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         shell: bash
