@@ -17,12 +17,14 @@ jobs:
         run: |
           echo "Before:"
           echo ${{ github.event.before }}
-          echo "Afterrr:"
+          echo "Afterrraaa:"
           echo ${{ github.event.after }}
-          echo "head Commaasdit:"
+          echo "head Casdommaasdit:"
           echo ${{ github.event.head_commit.id }}
           echo ${{ github.event.commits[0].id }}
-          echo ${{ github.event.commits[github.event.commits.length - 1].id }}
+          echo '${{ toJSON(github.event.commits) }}' 
+          echo '${{ toJSON(github.event.commits) }}' | jq ".[length - 1].id"
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-    
+          NUM: ${{ github.event.commits.length }}
+        shell: bash
