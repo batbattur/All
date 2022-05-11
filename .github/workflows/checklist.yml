@@ -20,7 +20,8 @@ jobs:
           echo "After:"
           echo ${{ github.event.after }}
           echo "head Commit:"
-          echo ${{ github.event.head_commit }}
+          echo ${{ github.event.head_commit.id }}
+          echo ${{ github.event.head_commit.tree }}
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
     
