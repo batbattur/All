@@ -31,6 +31,6 @@ jobs:
         env:
             COMMITS_JSON: ${{ toJSON(github.event.commits) }}
 
-      - name: Print head commit sha
+      - name: Print sha of the head commit
         run: echo "$push_head_commit"
         shell: bash
