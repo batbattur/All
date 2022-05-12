@@ -25,11 +25,12 @@ jobs:
       - name: Print github.sha for push event
         run: echo ${{ github.sha }}
         
-      - name: Get head commit for push event
-        run: |
-          echo "OVERRIDE_BRANCH=$(echo $COMMITS_JSON | jq ".[length - 2].id")" >> $GITHUB_ENV
-          echo "$OVERRIDE_BRANCH"
+      - name: Get head commit sha from the push event and set it to push_head_commit env
+        run: echo "push_head_commit=$(echo $COMMITS_JSON | jq ".[length - 2].id")" >> $GITHUB_ENV
         shell: bash
         env:
-          COMMITS_JSON: ${{ toJSON(github.event.commits) }}
+            COMMITS_JSON: ${{ toJSON(github.event.commits) }}
 
+      - name: Print sha of the head commit
+        run: echo "$push_head_commit"
+        shell: bash
