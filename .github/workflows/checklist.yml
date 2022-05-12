@@ -1,6 +1,5 @@
 name: QA 
 on:
-   pull_request:
    push:
       branches:
          - master
@@ -13,26 +12,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Get head commit for push event1
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - name: Print commits
+        run: echo '${{ toJSON(github.event.commits) }}' 
+        shell: bash
+
+      - name: Print github.sha for push event
+        run: echo ${{ github.sha }}
+        
+      - name: Get head commit for push event
         run: |
           echo "OVERRIDE_BRANCH=$(echo $COMMITS_JSON | jq ".[length - 2].id")" >> $GITHUB_ENV
         shell: bash
         env:
           COMMITS_JSON: ${{ toJSON(github.event.commits) }}
 
-      - name: Print job name122
-        run: |
-          echo "Before:"
-          echo ${{ github.event.before }}
-          echo "Afterr:"
-          echo ${{ github.event.after }}
-          echo "head commit:"
-          echo ${{ github.event.head_commit.id }}
-          echo ${{ github.event.commits[0].id }}
-          echo '${{ toJSON(github.event.commits) }}' 
-          echo '${{ toJSON(github.event.commits) }}' | jq ".[length - 2].id"
-          echo $NUM
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-          NUM: ${{ github.event.pull_request.head.sha || env.OVERRIDE_BRANCH }}
-        shell: bash
+
