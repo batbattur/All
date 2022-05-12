@@ -33,5 +33,3 @@ jobs:
         env:
           COMMITS_JSON: ${{ toJSON(github.event.commits) }}
 
-      - name: Test commit
-        run: echo "Test commit"
