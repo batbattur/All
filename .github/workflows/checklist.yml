@@ -29,6 +29,7 @@ jobs:
       - name: Print github.event.pull_request.head.sha
         run: echo ${{ github.event.pull_request.head.sha }}        
         
+        
       - name: Get head commit sha from the push event and set it to push_head_commit env
         run: echo "push_head_commit=$(echo $COMMITS_JSON | jq ".[length - 2].id")" >> $GITHUB_ENV
         shell: bash
