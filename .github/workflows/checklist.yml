@@ -24,7 +24,6 @@ jobs:
 
       - name: Print github.sha 
         run: echo ${{ github.sha }}
-        
 
       - name: Print github.event.pull_request.head.sha
         run: echo ${{ github.event.pull_request.head.sha }}        
