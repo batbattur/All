@@ -29,7 +29,6 @@ jobs:
         run: |
           echo "OVERRIDE_BRANCH=$(echo $COMMITS_JSON | jq ".[length - 2].id")" >> $GITHUB_ENV
           echo "$OVERRIDE_BRANCH"
-          echo "$OVERRIDE_BRANCH"
         shell: bash
         env:
           COMMITS_JSON: ${{ toJSON(github.event.commits) }}
