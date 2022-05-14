@@ -6,7 +6,7 @@ on:
          - master
 
 concurrency:
-   group: ${{ github.workflow }}-${{ github.ref }}
+   group: ${{ github.workflow }}-${{ github.ref }}-${{ github.ref != 'refs/heads/master' || github.run_number }}
    cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
 
 
@@ -23,8 +23,11 @@ jobs:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
 
-      - name: Print commits
-        run: echo '${{ toJSON(github.event.commits) }}' 
+      - name: Print TESTING
+        run: |
+           echo ${{ github.workflow  }}
+           echo ${{ github.ref }}
+           echo ${{ github.run_number }}
         shell: bash
 
       - name: Testing
