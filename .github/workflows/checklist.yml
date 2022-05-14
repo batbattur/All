@@ -6,7 +6,7 @@ on:
          - master
 
 concurrency:
-   group: ${{ github.workflow }}-${{ github.ref }}
+   group: ${{ github.workflow }}-${{ github.ref }}-${{ github.ref != 'refs/heads/master' || github.run_number }}
    cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
 
 
