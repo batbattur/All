@@ -29,10 +29,6 @@ jobs:
            echo ${{ github.ref }}
            echo ${{ github.run_number }}
         shell: bash
-
-      - name: Testing
-        run: bash testing.sh outside
-        shell: bash
         
       - name: Print github.sha 
         run: echo ${{ github.sha }}
@@ -49,4 +45,8 @@ jobs:
 
       - name: Print sha of the head commit
         run: echo "$push_head_commit"
+        shell: bash
+
+      - name: Testing
+        run: bash testing.sh outside
         shell: bash
