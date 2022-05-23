@@ -31,7 +31,7 @@ jobs:
         shell: bash
 
       - name: Testing
-        run: bash testing.sh
+        run: bash testing.sh outside
         shell: bash
         
       - name: Print github.sha 
