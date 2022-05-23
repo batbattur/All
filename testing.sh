@@ -2,7 +2,7 @@
 
 inside_nested() {
    echo "inside nested"
-   exit 1
+   exit 2
 }
 
 inside() {
