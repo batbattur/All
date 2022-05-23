@@ -1,7 +1,12 @@
 #!/bin/bash -ex
-inside() {
-   echo "inside"
+
+inside_nested() {
+   echo "inside nested"
    exit 1
+}
+
+inside() {
+   inside_nested || ( echo "it failed"; exit 1 )
 }
 
 outside() {
