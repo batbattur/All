@@ -31,7 +31,7 @@ jobs:
         shell: bash
 
       - name: Testing
-        run: sleep 5m
+        run: bash testing.sh
         shell: bash
         
       - name: Print github.sha 
