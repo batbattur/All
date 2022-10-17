@@ -22,6 +22,15 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
+        
+      - name: Dump GitHub output
+        run: echo $GITHUB_OUTPUT
+
+      - name: Print TESTING
+        run: |
+           echo $GITHUB_OUTPUT
+           echo "env"
+           echo $GITHUB_ENV
 
       - name: Print TESTING
         run: |
