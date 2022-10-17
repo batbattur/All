@@ -28,21 +28,18 @@ jobs:
 
       - name: Print TESTING
         run: |
+           echo "A=hii" >> $GITHUB_OUTPUT
+           echo "B=HEllo" >> $GITHUB_OUTPUT
+           echo "C=hey" >> $GITHUB_OUTPUT
            echo $GITHUB_OUTPUT
            echo "env"
            echo $GITHUB_ENV
 
-      - name: Print TESTING
-        run: |
-           echo ${{ github.workflow  }}
-           echo ${{ github.ref }}
-           echo ${{ github.run_number }}
-        shell: bash
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
 
-      - name: Testing
-        run: sleep 5m
-        shell: bash
-        
       - name: Print github.sha 
         run: echo ${{ github.sha }}
 
