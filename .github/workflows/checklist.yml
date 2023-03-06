@@ -22,18 +22,24 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
+        
+      - name: Dump GitHub output
+        run: echo $GITHUB_OUTPUT
 
       - name: Print TESTING
         run: |
-           echo ${{ github.workflow  }}
-           echo ${{ github.ref }}
-           echo ${{ github.run_number }}
-        shell: bash
+           echo "A=hii" >> $GITHUB_OUTPUT
+           echo "B=HEllo" >> $GITHUB_OUTPUT
+           echo "C=hey" >> $GITHUB_OUTPUT
+           echo $GITHUB_OUTPUT
+           echo "env"
+           echo $GITHUB_ENV
 
-      - name: Testing
-        run: sleep 5m
-        shell: bash
-        
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
       - name: Print github.sha 
         run: echo ${{ github.sha }}
 
@@ -50,3 +56,12 @@ jobs:
       - name: Print sha of the head commit
         run: echo "$push_head_commit"
         shell: bash
+
+
+      - name: Print TESTING
+        run: |
+           printenv
+           printenv GITHUB_OUTPUT
+           cat $(echo $GITHUB_OUTPUT)
+           echo "env"
+           echo $GITHUB_ENV
