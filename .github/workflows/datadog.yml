@@ -22,5 +22,5 @@ jobs:
               core.info(`actor=${context.actor}`)
               core.info(`payload=${JSON.stringify(context.payload, undefined, 2)}`)
 
-         - name: TESTING
-           run: echo "testing"
+        - name: TESTING
+          run: echo "testing"
