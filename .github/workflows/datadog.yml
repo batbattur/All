@@ -1,0 +1,26 @@
+name: Datadog
+
+on:
+   workflow_run:
+      workflows:
+         - '**'
+      types:
+         - completed
+
+jobs:
+   send:
+      runs-on: ubuntu-latest
+      timeout-minutes: 10
+      steps:
+        - name: Event
+          uses: actions/github-script@v6
+          with:
+            script: |
+              core.info(`eventName=${context.eventName}`)
+              core.info(`sha=${context.sha}`)
+              core.info(`ref=${context.ref}`)
+              core.info(`actor=${context.actor}`)
+              core.info(`payload=${JSON.stringify(context.payload, undefined, 2)}`)
+
+         - name: TESTING
+           run: echo "testing"
