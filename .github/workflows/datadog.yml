@@ -61,13 +61,30 @@ jobs:
 
         - name: Get Pull Info
           uses: octokit/request-action@v2.x
+          if: github.event.workflow_run.event == 'pull_request'
           id: get_action_job_data
           with:
             route: GET /repos/${{ github.repository }}/pulls/${{ steps.pull-number.outputs.pull-number }}
-            token: ${{ secrets.GITHUB_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
         - name: Get pull label and draft status
+          if: github.event.workflow_run.event == 'pull_request'
           run: |
-            echo "$job_data_json"
+            JOB_DATA_JSON=$(echo $job_data_json | jq '.jobs | .[]? | select(.name == "${{ env.GITHUB_JOB_NAME }}")')
+            echo "job-url=$(echo $JOB_DATA_JSON | jq '.html_url')" >> $GITHUB_OUTPUT
+            echo "job-start-time=$(echo $JOB_DATA_JSON | jq '.started_at')" >> $GITHUB_OUTPUT
           env:
             job_data_json: ${{ steps.get_action_job_data.outputs.data }}
+
+        - name: Get pull label and draft status
+          if: github.event.workflow_run.event == 'pull_request'
+          run: |
+            LABELS=$(echo $job_data_json | jq '.labels | .[]? | .labels')
+            TESTING_LABEL=$(echo $job_data_json | jq '.labels | .[]? | select(.labels == "testing")')
+            DRAFT_STATUS=$(echo $job_data_json | jq '.draft')
+          env:
+            job_data_json: ${{ steps.get_action_job_data.outputs.data }}
+
+        - name: Should be skipped
+          run: echo "testing"
+
