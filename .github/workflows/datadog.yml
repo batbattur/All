@@ -13,14 +13,31 @@ jobs:
       timeout-minutes: 10
       steps:
         - name: Event
+          id: set-result
           uses: actions/github-script@v6
           with:
             script: |
-              core.info(`eventName=${context.eventName}`)
-              core.info(`sha=${context.sha}`)
-              core.info(`ref=${context.ref}`)
-              core.info(`actor=${context.actor}`)
-              core.info(`payload=${JSON.stringify(context.payload, undefined, 2)}`)
+              core.info(`${JSON.stringify(context.payload, undefined, 2)}`)
+              
+        - name: Get result
+          run: echo "${{steps.set-result.outputs.result}}"
+
+        - name: Get context using console
+          id: set-result-console
+          uses: actions/github-script@v6
+          with:
+            script: console.log(context)
+
+        - name: Get result with console
+          run: echo "${{steps.set-result-console.outputs.result}}"
+
+        - name: Get result
+          run: echo "${{steps.set-result.outputs.result}}"
+
+        - name: Dump GitHub context
+          env:
+            GITHUB_CONTEXT: ${{ toJSON(github) }}
+          run: echo "$GITHUB_CONTEXT"
 
         - name: TESTING
           run: echo "testing"
