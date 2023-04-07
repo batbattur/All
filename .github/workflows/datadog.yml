@@ -64,6 +64,7 @@ jobs:
           id: get_action_job_data
           with:
             route: GET /repos/${{ github.repository }}/pulls/${{ steps.pull-number.outputs.pull-number }}
+            token: ${{ secrets.GITHUB_TOKEN }}
             
         - name: Get pull label and draft status
           run: |
