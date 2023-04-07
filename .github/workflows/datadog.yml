@@ -89,12 +89,14 @@ jobs:
             echo "Draft: $DRAFT_STATUS"
             if [ -n "$TESTING_LABEL" ] || [ "$DRAFT_STATUS" == "true" ]
             then
+              echo "SETTING SKIP TO TRUE"
               echo "skip=true" >> $GITHUB_OUTPUT
+              
             fi
           env:
             job_data_json: ${{ steps.get_action_job_data.outputs.data }}
 
         - name: Should be skipped
-          if: "! (github.event.workflow_run.event == 'pull_request' == 'pull_request' && steps.final-check.outputs.skip == 'true')"
+          if: "! (github.event.workflow_run.event == 'pull_request' && steps.final-check.outputs.skip == 'true')"
           run: echo "testing"
 
