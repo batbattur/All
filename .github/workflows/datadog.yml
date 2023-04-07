@@ -95,6 +95,6 @@ jobs:
             job_data_json: ${{ steps.get_action_job_data.outputs.data }}
 
         - name: Should be skipped
-          if: ! ((github.event_name == 'pull_request') && (steps.final-check.outputs.skip == 'true'))
+          if: ! (github.event.workflow_run.event == 'pull_request' == 'pull_request' && steps.final-check.outputs.skip == 'true')
           run: echo "testing"
 
