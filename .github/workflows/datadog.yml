@@ -78,17 +78,23 @@ jobs:
             job_data_json: ${{ steps.get_action_job_data.outputs.data }}
 
         - name: Get pull label and draft status
+          id: final-check
           if: github.event.workflow_run.event == 'pull_request'
           run: |
             LABELS=$(echo $job_data_json | jq '.labels')
             TESTING_LABEL=$(echo $job_data_json | jq '.labels | .[]? | select(.name == "bug")')
             DRAFT_STATUS=$(echo $job_data_json | jq '.draft')
-            echo "$LABELS"
-            echo "$TESTING_LABEL"
-            echo "$DRAFT_STATUS"
+            echo "All labels: $LABELS"
+            echo "Testing label: $TESTING_LABEL"
+            echo "Draft: $DRAFT_STATUS"
+            if [ -n "$TESTING_LABEL" ] || [ "$DRAFT_STATUS" == "true" ]
+            then
+              echo "skip=true" >> $GITHUB_OUTPUT
+            fi
           env:
             job_data_json: ${{ steps.get_action_job_data.outputs.data }}
 
         - name: Should be skipped
+          if: ! (github.event_name == 'pull_request' && steps.final-check.outputs.skip == 'true')
           run: echo "testing"
 
