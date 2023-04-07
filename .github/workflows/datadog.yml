@@ -50,7 +50,7 @@ jobs:
           run: echo "${{github.event.workflow_run.event}}"
 
         - name: TESTING event
-          if: github.event.workflow_run.event == "pull_request"
+          if: github.event.workflow_run.event == 'pull_request'
           id: pull-number
           run: |
             echo "${{github.event.workflow_run.pull_requests}}"
