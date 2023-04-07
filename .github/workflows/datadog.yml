@@ -41,3 +41,32 @@ jobs:
 
         - name: TESTING
           run: echo "testing"
+
+        - name: TESTING event
+          run: echo "${{github.event.workflow_run.event}}"
+
+
+        - name: TESTING event
+          run: echo "${{github.event.workflow_run.event}}"
+
+        - name: TESTING event
+          if: github.event.workflow_run.event == "pull_request"
+          id: pull-number
+          run: |
+            echo "${{github.event.workflow_run.pull_requests}}"
+            echo "${{github.event.workflow_run.pull_requests.[0].number}}"
+            echo "${{github.event.workflow_run.pull.requests.[0].url}}"
+            echo "pull-number=$(echo ${{github.event.workflow_run.pull_requests.[0].number}})" >> $GITHUB_OUTPUT
+
+
+        - name: Get Pull Info
+          uses: octokit/request-action@v2.x
+          id: get_action_job_data
+          with:
+            route: GET /repos/${{ github.repository }}/pulls/${{ steps.pull-number.outputs.pull-number }}
+            
+        - name: Get pull label and draft status
+          run: |
+            echo "$job_data_json"
+          env:
+            job_data_json: ${{ steps.get_action_job_data.outputs.data }}
