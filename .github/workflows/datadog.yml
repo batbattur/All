@@ -34,7 +34,7 @@ jobs:
             DRAFT_STATUS=$(echo $job_data_json | jq '.draft')
             if [ -n "$TESTING_LABEL" ] || [ "$DRAFT_STATUS" == "true" ]
             then
-              echo "Skipping to send the workflow metrics data to Datadog."
+              echo "Skipping to send the workfwlow metrics data to Datadog."
               echo "skip=true" >> $GITHUB_OUTPUT
             fi
           env:
