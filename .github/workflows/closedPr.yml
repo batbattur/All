@@ -1,0 +1,14 @@
+name: Test
+on:
+   pull_request:
+      types: [closed]
+
+jobs:
+   cleanup:
+      runs-on: ubuntu-latest
+      timeout-minutes: 5
+      env:
+         BRANCH: ${{ github.event.pull_request.head.ref }}
+      steps:
+         - name: Test
+           uses: actions/checkout@v3
