@@ -18,13 +18,20 @@ jobs:
           run: echo "$GITHUB_CONTEXT"
 
         - name: Testing pull_requests == '[]'
-          if: github.event.workflow_run.pull_requests == '[]'
-          run: echo "testing"
+          if: join(github.event.workflow_run.pull_requests.*.number) == ''
+          run: echo "${{ github.event.workflow_run.pull_requests }}"
+          
+        - name: Testing pull_requests == '[]'
+          if: join(github.event.workflow_run.pull_requests) == ''
+          run: echo "${{ github.event.workflow_run.pull_requests }}"
 
         - name: Testing pull_requests == ''
           if: github.event.workflow_run.pull_requests == ''
           run: echo "testing"
           
+        - name: Testing pull_requests == ''
+          if: github.event.workflow_run.pull_requests == ''
+          run: echo "testing"
 
         - name: Get Pull Info
           uses: octokit/request-action@v2.x
