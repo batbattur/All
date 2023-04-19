@@ -28,7 +28,7 @@ jobs:
               echo "skip=false" >> $GITHUB_ENV
             fi
           env:
-            PULL_REQUESTS: join(github.event.workflow_run.pull_requests)
+            PULL_REQUESTS: ${{ join(github.event.workflow_run.pull_requests) }}
 
         - name: Get Pull Info
           uses: octokit/request-action@v2.x
