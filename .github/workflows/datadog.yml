@@ -20,14 +20,15 @@ jobs:
         - name: Check if the pull was closed
           if: github.event.workflow_run.event == 'pull_request'
           run: |
-            if [ -z "$PULLS_REQUESTS" ]
+            echo "$PULL_REQUESTS"
+            if [ -z "$PULL_REQUESTS" ]
             then
               echo "skip=true" >> $GITHUB_ENV
             else
               echo "skip=false" >> $GITHUB_ENV
             fi
           env:
-            PULLS_REQUESTS: join(github.event.workflow_run.pull_requests)
+            PULL_REQUESTS: join(github.event.workflow_run.pull_requests)
 
         - name: Get Pull Info
           uses: octokit/request-action@v2.x
