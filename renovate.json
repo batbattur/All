@@ -43,6 +43,7 @@
    },
    "cloneSubmodules": true,
    "allowScripts": true,
+   "ignoreScripts": false,
    "platform": "github",
    "branchPrefix": "test-renovate/",
    "repositories": [
