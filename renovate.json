@@ -43,5 +43,9 @@
    },
    "cloneSubmodules": true,
    "allowScripts": true,
-   "platform": "github"
+   "platform": "github",
+   "branchPrefix": "test-renovate/",
+   "repositories": [
+    "batbattur/All"
+   ]
 }
