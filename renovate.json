@@ -46,6 +46,6 @@
    "platform": "github",
    "branchPrefix": "test-renovate/",
    "repositories": [
-    "batbattur/All"
+      {"repository": "batbattur/All"}
    ]
 }
