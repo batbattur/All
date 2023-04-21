@@ -49,6 +49,5 @@
    "repositories": [
       {"repository": "batbattur/All"}
    ],
-   "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
-   "enabled": false
+   "gitAuthor": "Renovate Bot <bot@renovateapp.com>"
 }
