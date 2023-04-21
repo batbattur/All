@@ -48,5 +48,6 @@
    "branchPrefix": "test-renovate/",
    "repositories": [
       {"repository": "batbattur/All"}
-   ]
+   ],
+   "gitAuthor": "Renovate Bot <bot@renovateapp.com>"
 }
