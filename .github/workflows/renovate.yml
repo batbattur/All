@@ -14,10 +14,10 @@ jobs:
            with:
               submodules: recursive
 
-         - name: Run
-           run: |
-              git submodule sync
-              git submodule update --init --recursive
+        #  - name: Run
+        #    run: |
+        #       git submodule sync
+        #       git submodule update --init --recursive
 
          - name: Self-hosted Renovate
            uses: renovatebot/github-action@v36.0.3
