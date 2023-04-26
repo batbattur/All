@@ -51,9 +51,11 @@ module.exports = {
       {"repository": "batbattur/All"}
    ],
    "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
-   "hostRules": [{
-        "hostType": "github",
-        "domainName": "github.com",
-        "token": token
-    }]
+   "hostRules": [
+      {
+         "hostType": "github",
+         "domainName": "github.com",
+         "token": token
+      }
+   ]
 };
