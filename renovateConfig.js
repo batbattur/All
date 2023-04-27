@@ -58,5 +58,5 @@ module.exports = {
          "token": token,
       }
    ],
-   "npmrc": `//npm.fontawesome.com/`
+   "npmrc": `//npm.fontawesome.com/:_authToken=${token}`
 };
