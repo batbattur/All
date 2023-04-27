@@ -1,4 +1,4 @@
-const token = process.env.FONT_AWESOME_TOKEN;
+const RENOVATE_FONTAWESOME_TOKEN = process.env.RENOVATE_FONTAWESOME_TOKEN;
 
 module.exports = {
    "extends": ["config:base"],
@@ -55,8 +55,7 @@ module.exports = {
       {
          "hostType": "npm",
          "matchHost": "https://npm.fontawesome.com/",
-         "token": token,
+         "token": RENOVATE_FONTAWESOME_TOKEN,
       }
    ],
-   "npmrc": `//npm.fontawesome.com/:_authToken=${token}`
 };
