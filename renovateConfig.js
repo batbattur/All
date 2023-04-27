@@ -53,9 +53,9 @@ module.exports = {
    "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
    "hostRules": [
       {
-         "matchHost": "npm.fontawesome.com",
+         "hostType": "npm",
+         "matchHost": "https://npm.fontawesome.com/",
          "token": token,
-         "authType": "Basic",
       }
    ]
 };
