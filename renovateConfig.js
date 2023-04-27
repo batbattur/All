@@ -57,5 +57,6 @@ module.exports = {
          "matchHost": "https://npm.fontawesome.com/",
          "token": token,
       }
-   ]
+   ],
+   "npmrc": `//npm.fontawesome.com/`
 };
