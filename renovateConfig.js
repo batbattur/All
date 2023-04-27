@@ -1,4 +1,4 @@
-const token = process.env.RENOVATE_TOKEN
+const token = process.env.FONT_AWESOME_TOKEN;
 
 module.exports = {
    "extends": ["config:base"],
@@ -53,9 +53,9 @@ module.exports = {
    "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
    "hostRules": [
       {
-         "hostType": "github",
-         "domainName": "github.com",
-         "token": token
+         "matchHost": "npm.fontawesome.com",
+         "token": token,
+         "authType": "Basic",
       }
    ]
 };
