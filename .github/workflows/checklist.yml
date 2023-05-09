@@ -33,11 +33,11 @@ jobs:
         run: echo "hi"
         
       - name: Should skip (using comparison)
-        if: ! steps.check-queue.outputs.QUEUE_LOCKED
+        if: "!steps.check-queue.outputs.QUEUE_LOCKED"
         run: echo "hi"
         
       - name: eval expression
-        run: echo ${{ ! steps.check-queue.outputs.QUEUE_LOCKED }}
+        run: echo "${{ !steps.check-queue.outputs.QUEUE_LOCKED }}"
 
       - name: Test output
         id: check-queue-false
@@ -51,12 +51,12 @@ jobs:
         run: echo "hi"
         
       - name: Should run (using comparison)
-        if: ! steps.check-queue-false.outputs.QUEUE_LOCKED
+        if: "!steps.check-queue-false.outputs.QUEUE_LOCKED"
         run: echo "hi"
      
       - name: eval expression
         run: echo "hi"
-        env: ${{ ! steps.check-queue-false.outputs.QUEUE_LOCKED }}
+        env: "${{ ! steps.check-queue-false.outputs.QUEUE_LOCKED }}"
 
      
 #       - name: Dump GitHub context
