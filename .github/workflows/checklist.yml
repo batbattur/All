@@ -22,41 +22,40 @@ jobs:
         run: jq --version
         
       - name: Test output
-        id: check-queue
-        run: echo "QUEUE_LOCKED=true" >>$GITHUB_OUTPUT
+        run: echo "QUEUE_LOCKED=true" >>$GITHUB_ENV
         
       - name: Echo QUEUE_LOCKED
-        run: echo "${{ steps.check-queue.outputs.QUEUE_LOCKED }}"
+        run: echo "${{ env.QUEUE_LOCKED }}"
 
-      - name: Should be skipped (using negation)
-        if: steps.check-queue.outputs.QUEUE_LOCKED != 'true'
+      - name: Should run 1
+        if: ! env.QUEUE_LOCKED == 'false'
         run: echo "hi"
         
-      - name: Should skip (using comparison)
-        if: "!steps.check-queue.outputs.QUEUE_LOCKED"
+      - name: Should skip 1
+        if: ! env.QUEUE_LOCKED == 'true'
         run: echo "hi"
         
-      - name: eval expression
-        run: echo "${{ !steps.check-queue.outputs.QUEUE_LOCKED }}"
-
       - name: Test output
-        id: check-queue-false
-        run: echo "QUEUE_LOCKED=false" >>$GITHUB_OUTPUT
+        run: echo "QUEUE_LOCKED=false" >>$GITHUB_ENV
         
       - name: Echo QUEUE_LOCKED
-        run: echo "${{ steps.check-queue-false.outputs.QUEUE_LOCKED }}"
+        run: echo "${{ env.QUEUE_LOCKED }}"
 
-      - name: Should run 
-        if: steps.check-queue-false.outputs.QUEUE_LOCKED != 'true'
+      - name: Should run 2
+        if: ! env.QUEUE_LOCKED == 'false'
         run: echo "hi"
         
-      - name: Should run (using comparison)
-        if: "!steps.check-queue-false.outputs.QUEUE_LOCKED"
+      - name: Should skip 2
+        if: ! env.QUEUE_LOCKED == 'true'
         run: echo "hi"
-     
-      - name: eval expression
-        run: echo "${{ !steps.check-queue-false.outputs.QUEUE_LOCKED }}"
 
+      - name: Should run 3
+        if: ! env.QUEUE_LOCKED != 'false'
+        run: echo "hi"
+        
+      - name: Should skip 3
+        if: ! env.QUEUE_LOCKED != 'true'
+        run: echo "hi"
      
 #       - name: Dump GitHub context
 #         env:
