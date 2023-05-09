@@ -23,16 +23,19 @@ jobs:
         
       - name: Test output
         id: check-queue
-        run: echo "QUEUE_LOCKED='false'" >>$GITHUB_OUTPUT
+        run: echo "QUEUE_LOCKED='true'" >>$GITHUB_OUTPUT
         
-#       - name: Should skip
-#         if: steps.check-queue.outputs.QUEUE_LOCKED != 'true'
-#         run: echo "hi"
+      - name: Echo QUEUE_LOCKED
+        run: echo "${{ steps.check-queue.outputs.QUEUE_LOCKED }}"
 
-      - name: Should skip 
+      - name: Should skip (using negation)
         if: "!steps.check-queue.outputs.QUEUE_LOCKED"
         run: echo "hi"
-
+        
+      - name: Should skip (using comparison)
+        if: steps.check-queue.outputs.QUEUE_LOCKED != 'true'
+        run: echo "hi"
+     
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
