@@ -30,7 +30,7 @@ jobs:
         run: echo "hi"
 
       - name: Test steps.check-queue.outputs.QUEUE_LOCKED != 'true'
-        if: ! steps.check-queue.outputs.QUEUE_LOCKED
+        if: "!steps.check-queue.outputs.QUEUE_LOCKED"
         run: echo "hi"
 
       - name: Dump GitHub context
