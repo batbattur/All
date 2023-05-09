@@ -27,27 +27,14 @@ jobs:
       - name: Echo QUEUE_LOCKED
         run: echo "${{ env.QUEUE_LOCKED }}"
 
-      - name: Should skip 1
-        if: env.QUEUE_LOCKED == 'true'
-        run: echo "hi"
-        
-      - name: Should run deploy 1
+      - name: Deploy
         if: env.QUEUE_LOCKED == 'false'
         run: echo "hi"
-
-      - name: Test output QUEUE_LOCKED=false
-        run: echo "QUEUE_LOCKED=false" >>$GITHUB_ENV
         
-      - name: Echo QUEUE_LOCKED
-        run: echo "${{ env.QUEUE_LOCKED }}"
-
-      - name: Should skip 1
-        if: env.QUEUE_LOCKED == 'true'
+      - name: Deploy 2
+        if: "{{ ! env.QUEUE_LOCKED }}"
         run: echo "hi"
         
-      - name: Should run deploy 1
-        if: env.QUEUE_LOCKED == 'false'
-        run: echo "hi"
 
 
      
