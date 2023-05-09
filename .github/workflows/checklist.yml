@@ -55,8 +55,7 @@ jobs:
         run: echo "hi"
      
       - name: eval expression
-        run: echo "hi"
-        env: "${{ ! steps.check-queue-false.outputs.QUEUE_LOCKED }}"
+        run: echo "${{ !steps.check-queue-false.outputs.QUEUE_LOCKED }}"
 
      
 #       - name: Dump GitHub context
