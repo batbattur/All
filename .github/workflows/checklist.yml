@@ -23,44 +23,67 @@ jobs:
         
       - name: Test output
         id: check-queue
-        run: echo "QUEUE_LOCKED=false" >>$GITHUB_OUTPUT
+        run: echo "QUEUE_LOCKED=true" >>$GITHUB_OUTPUT
         
       - name: Echo QUEUE_LOCKED
         run: echo "${{ steps.check-queue.outputs.QUEUE_LOCKED }}"
 
-      - name: Should skip (using negation)
-        if: "!steps.check-queue.outputs.QUEUE_LOCKED"
+      - name: Should be skipped (using negation)
+        if: steps.check-queue.outputs.QUEUE_LOCKED != 'true'
         run: echo "hi"
         
       - name: Should skip (using comparison)
-        if: steps.check-queue.outputs.QUEUE_LOCKED != 'true'
+        if: ! steps.check-queue.outputs.QUEUE_LOCKED
+        run: echo "hi"
+        
+      - name: eval expression
+        run: echo ${{ ! steps.check-queue.outputs.QUEUE_LOCKED }}
+
+      - name: Test output
+        id: check-queue-false
+        run: echo "QUEUE_LOCKED=false" >>$GITHUB_OUTPUT
+        
+      - name: Echo QUEUE_LOCKED
+        run: echo "${{ steps.check-queue-false.outputs.QUEUE_LOCKED }}"
+
+      - name: Should run 
+        if: steps.check-queue-false.outputs.QUEUE_LOCKED != 'true'
+        run: echo "hi"
+        
+      - name: Should run (using comparison)
+        if: ! steps.check-queue-false.outputs.QUEUE_LOCKED
         run: echo "hi"
      
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
+      - name: eval expression
+        run: echo "hi"
+        env: ${{ ! steps.check-queue-false.outputs.QUEUE_LOCKED }}
 
-      - name: Print TESTING
-        run: |
-           echo ${{ github.workflow  }}
-           echo ${{ github.ref }}
-           echo ${{ github.run_number }}
-        shell: bash
-        
-      - name: Print github.sha 
-        run: echo ${{ github.sha }}
+     
+#       - name: Dump GitHub context
+#         env:
+#           GITHUB_CONTEXT: ${{ toJSON(github) }}
+#         run: echo "$GITHUB_CONTEXT"
 
-      - name: Print github.event.pull_request.head.sha
-        run: echo ${{ github.event.pull_request.head.sha }}        
+#       - name: Print TESTING
+#         run: |
+#            echo ${{ github.workflow  }}
+#            echo ${{ github.ref }}
+#            echo ${{ github.run_number }}
+#         shell: bash
         
-        
-      - name: Get head commit sha from the push event and set it to push_head_commit env
-        run: echo "push_head_commit=$(echo $COMMITS_JSON | jq ".[length - 2].id")" >> $GITHUB_ENV
-        shell: bash
-        env:
-            COMMITS_JSON: ${{ toJSON(github.event.commits) }}
+#       - name: Print github.sha 
+#         run: echo ${{ github.sha }}
 
-      - name: Print sha of the head commit
-        run: echo "$push_head_commit"
-        shell: bash
+#       - name: Print github.event.pull_request.head.sha
+#         run: echo ${{ github.event.pull_request.head.sha }}        
+        
+        
+#       - name: Get head commit sha from the push event and set it to push_head_commit env
+#         run: echo "push_head_commit=$(echo $COMMITS_JSON | jq ".[length - 2].id")" >> $GITHUB_ENV
+#         shell: bash
+#         env:
+#             COMMITS_JSON: ${{ toJSON(github.event.commits) }}
+
+#       - name: Print sha of the head commit
+#         run: echo "$push_head_commit"
+#         shell: bash
