@@ -23,7 +23,7 @@ jobs:
         
       - name: Test output QUEUE_LOCKED=false
         id: check_queue
-        run: echo "QUEUE_LOCKED='false'" >> $GITHUB_OUTPUT
+        run: echo "QUEUE_LOCKED=false" >> $GITHUB_OUTPUT
         
       - name: Echo QUEUE_LOCKED
         run: echo "${{ steps.check_queue.outputs.QUEUE_LOCKED }}"
