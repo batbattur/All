@@ -21,7 +21,7 @@ jobs:
       - name: Checkout code
         run: jq --version
         
-      - name: Test output QUEUE_LOCKED=true
+      - name: Test output QUEUE_LOCKED=false
         run: echo "QUEUE_LOCKED=true" >>$GITHUB_ENV
         
       - name: Echo QUEUE_LOCKED
