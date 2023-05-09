@@ -36,7 +36,7 @@ jobs:
         run: echo "hi"
 
       - name: Test output QUEUE_LOCKED=false
-        run: echo "QUEUE_LOCKED=true" >>$GITHUB_ENV
+        run: echo "QUEUE_LOCKED=false" >>$GITHUB_ENV
         
       - name: Echo QUEUE_LOCKED
         run: echo "${{ env.QUEUE_LOCKED }}"
