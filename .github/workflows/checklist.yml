@@ -28,11 +28,11 @@ jobs:
         run: echo "${{ env.QUEUE_LOCKED }}"
 
       - name: Should run 1
-        if: env.QUEUE_LOCKED == false
+        if: ${{ env.QUEUE_LOCKED == false }}
         run: echo "hi"
         
       - name: Should skip 1
-        if: env.QUEUE_LOCKED == true
+        if: ${{ env.QUEUE_LOCKED == true }}
         run: echo "hi"
         
       - name: Test output
@@ -42,18 +42,21 @@ jobs:
         run: echo "${{ env.QUEUE_LOCKED }}"
 
       - name: Should run 1
-        if: env.QUEUE_LOCKED == false
+        if:  ${{ env.QUEUE_LOCKED == false }}
         run: echo "hi"
         
       - name: Should skip 1
-        if: env.QUEUE_LOCKED == true
+        if: ${{ env.QUEUE_LOCKED == true }}
         run: echo "hi"
 
-
+      - name: Test output
+        run: echo "QUEUE_LOCKED=true" >>$GITHUB_ENV
         
-      - name: Should skip 2
-        if: "! env.QUEUE_LOCKED"
-        run: echo "hi"
+      - name: ${{ env.QUEUE_LOCKED == true }}
+        run: echo ${{ env.QUEUE_LOCKED == true }}
+        
+      - name: ${{ env.QUEUE_LOCKED == false }}
+        run: echo ${{ env.QUEUE_LOCKED == false }}
      
 #       - name: Dump GitHub context
 #         env:
