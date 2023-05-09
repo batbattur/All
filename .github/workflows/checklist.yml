@@ -22,7 +22,7 @@ jobs:
         run: jq --version
         
       - name: Test output QUEUE_LOCKED=false
-        run: echo "QUEUE_LOCKED=true" >>$GITHUB_ENV
+        run: echo "QUEUE_LOCKED=false" >>$GITHUB_ENV
         
       - name: Echo QUEUE_LOCKED
         run: echo "${{ env.QUEUE_LOCKED }}"
@@ -35,7 +35,9 @@ jobs:
         if: "! env.QUEUE_LOCKED"
         run: echo "hi"
         
-
+      - name: Deploy 3
+        if: "!env.QUEUE_LOCKED"
+        run: echo "hi"
 
      
 #       - name: Dump GitHub context
