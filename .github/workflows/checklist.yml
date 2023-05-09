@@ -23,13 +23,13 @@ jobs:
         
       - name: Test output QUEUE_LOCKED=false
         id: check_queue
-        run: echo "QUEUE_LOCKED=false" >> $GITHUB_OUTPUT
+        run: echo "QUEUE_LOCKED=true" >> $GITHUB_OUTPUT
         
       - name: Echo QUEUE_LOCKED
         run: echo "${{ steps.check_queue.outputs.QUEUE_LOCKED }}"
 
       - name: Deploy
-        if: steps.check_queue.outputs.QUEUE_LOCKED == 'true'
+        if: steps.check_queue.outputs.QUEUE_LOCKED == 'false'
         run: echo "hi"
      
 #       - name: Dump GitHub context
