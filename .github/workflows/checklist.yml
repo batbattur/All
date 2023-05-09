@@ -32,7 +32,7 @@ jobs:
         run: echo "hi"
         
       - name: Deploy 2
-        if: "{{ ! env.QUEUE_LOCKED }}"
+        if: "! env.QUEUE_LOCKED"
         run: echo "hi"
         
 
