@@ -1,5 +1,3 @@
-const FONTAWESOME_TOKEN = process.env.RENOVATE_FONTAWESOME_TOKEN;
-
 module.exports = {
    "extends": ["config:base"],
    "stabilityDays": 7,
@@ -51,11 +49,4 @@ module.exports = {
       {"repository": "batbattur/All"}
    ],
    "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
-   "hostRules": [
-      {
-         "hostType": "npm",
-         "matchHost": "https://npm.fontawesome.com/",
-         "token": FONTAWESOME_TOKEN,
-      }
-   ],
 };
