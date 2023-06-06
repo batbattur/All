@@ -7,3 +7,7 @@ runs:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
         shell: bash
+
+      - name: echo COMMIT
+        run: echo "$COMMIT"
+        shell: bash
