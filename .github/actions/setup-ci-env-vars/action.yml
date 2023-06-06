@@ -1,6 +1,7 @@
 name: Set CI Environment Variables
 description: Set CI Environment Variables
 runs:
+   using: 'composite'
    steps:        
       - name: Dump GitHub context
         env:
