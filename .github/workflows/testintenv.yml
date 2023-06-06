@@ -4,6 +4,17 @@ on:
    push:
       branches:
          - master
+   workflow_dispatch:
+      inputs:
+         fast_deploy:
+            description: 'Fast deploy: skips psalm and tests.'
+            required: true
+            default: 'false'
+            type: choice
+            options:
+               - 'false'
+               - 'true'
+
 env:
   COMMIT: ${{ github.sha }}
 
@@ -21,8 +32,20 @@ jobs:
       - name: echo GITHUB_SHA
         run: echo "$GITHUB_SHA"
 
-      - name: echo chommit from composite action
-        uses: ./.github/actions/setup-ci-env-vars
+      - name: echo inputs.fast_deploy
+        if: github.event_name == 'workflow_dispatch' && inputs.fast_deploy
+        run: echo "${{ inputs.build_id }}"
+
+      - name: echo inputs.fast_deploy true
+        if: github.event_name == 'workflow_dispatch' && inputs.fast_deploy == 'true'
+        run: echo "${{ inputs.build_id }}"
+
+
+      - name: echo inputs.fast_deploy false
+        if: github.event_name == 'workflow_dispatch' && inputs.fast_deploy == 'false'
+        run: echo "${{ inputs.build_id }}"
+
+
 
   test2:
     runs-on: ubuntu-latest
