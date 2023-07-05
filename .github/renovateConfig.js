@@ -5,7 +5,7 @@ module.exports = {
    "git-submodules": {
       "enabled": true
    },
-   "dependencyDashboard": true,
+   "dependencyDashboard": false,
    "dependencyDashboardOSVVulnerabilitySummary": "all",
    "osvVulnerabilityAlerts": true,
    "major": {
