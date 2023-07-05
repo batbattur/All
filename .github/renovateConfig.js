@@ -19,6 +19,10 @@ module.exports = {
       {
          "matchDepTypes": ["devDependencies", "requireDev"],
          "prPriority": 0
+      },
+      {
+         "matchPaths": ["Testing/**"],
+         "dependencyDashboardApproval": true
       }
    ],
    "rebaseWhen": "conflicted",
