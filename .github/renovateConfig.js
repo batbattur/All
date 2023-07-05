@@ -26,7 +26,7 @@ module.exports = {
          "description": "Disabled Paths",
          "matchPaths": ["Testing/**"],
          // "dependencyDashboardApproval": true
-         "schedule": ["never"]
+         "schedule": ["0 0 0 1 1 ? 1970"]
       }
    ],
    "rebaseWhen": "conflicted",
