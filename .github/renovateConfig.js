@@ -23,7 +23,8 @@ module.exports = {
       {
          "description": "Disabled Paths",
          "matchPaths": ["Testing/**"],
-         "dependencyDashboardApproval": true
+         // "dependencyDashboardApproval": true
+         "schedule": "on 1st day of January in 2100"
       }
    ],
    "rebaseWhen": "conflicted",
