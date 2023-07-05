@@ -8,8 +8,6 @@ on:
 jobs:
    renovate:
       runs-on: ubuntu-latest
-      env:
-         FATOKEN: ${{ secrets.FONT_AWESOME_TOKEN }}
       steps:
          - name: Checkout
            uses: actions/checkout@v3
@@ -28,4 +26,3 @@ jobs:
               token: ${{ secrets.RENOVATE_TOKEN }}
            env:
               LOG_LEVEL: 'debug'
-              RENOVATE_FONTAWESOME_TOKEN: ${{ secrets.FONT_AWESOME_TOKEN }}

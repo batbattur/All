@@ -1,28 +1,17 @@
 module.exports = {
    "extends": ["config:base"],
    "stabilityDays": 7,
-   "timezone": "America/Los_Angeles",
-   "schedule": ["after 9pm and before 12am every weekday"],
-   "prHourlyLimit": 1,
-   "prConcurrentLimit": 1,
    "labels": ["dependencies", "renovate"],
    "git-submodules": {
       "enabled": true
    },
    "dependencyDashboard": true,
+   "dependencyDashboardOSVVulnerabilitySummary": "all",
+   "osvVulnerabilityAlerts": true,
    "major": {
       "dependencyDashboardApproval": true
    },
    "packageRules": [
-      {
-         "matchPackageNames": ["aws/aws-sdk-php", "rector/rector"],
-         "matchUpdateTypes": ["patch"],
-         "enabled": false
-      },
-      {
-         "matchPackageNames": ["react-commerce"],
-         "prPriority": 2
-      },
       {
          "matchDepTypes": ["dependencies", "require"],
          "prPriority": 1
@@ -36,8 +25,8 @@ module.exports = {
    "enabledManagers": ["npm", "composer", "git-submodules", "github-actions"],
    "force": {
       "constraints": {
-         "node": "14.20.1",
-         "pnpm": "7.27.0"
+         "node": "16.14.0",
+         "pnpm": "8.5.0"
       }
    },
    "cloneSubmodules": true,
