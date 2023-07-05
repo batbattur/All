@@ -21,6 +21,7 @@ module.exports = {
          "prPriority": 0
       },
       {
+         "description": "Disabled Paths",
          "matchPaths": ["Testing/**"],
          "dependencyDashboardApproval": true
       }
