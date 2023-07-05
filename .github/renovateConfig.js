@@ -11,6 +11,8 @@ module.exports = {
    "major": {
       "dependencyDashboardApproval": true
    },
+   "onboarding": false,
+   "requireConfig": false,
    "packageRules": [
       {
          "matchDepTypes": ["dependencies", "require"],
