@@ -13,6 +13,7 @@ module.exports = {
    },
    "onboarding": false,
    "requireConfig": false,
+   "prHourlyLimit": 0,
    "packageRules": [
       {
          "matchDepTypes": ["dependencies", "require"],
