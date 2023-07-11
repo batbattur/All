@@ -48,6 +48,43 @@ jobs:
       - name: Checkout code
         run: jq --version
         
+  checklist_job1:
+    needs: checklist_job
+    runs-on: ubuntu-latest
+    name: checklist_job1
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: RUN ATTEMPT AND NUMBER
+        run: |
+           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
+           echo "RUN NUMBER: ${{ github.run_number }}"
+
+      - name: TEST 1
+        if:  ${{ github.run_attempt > 1 }} 
+        run: |
+           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
+           echo "RUN NUMBER: ${{ github.run_number }}"
+
+      - name: TEST 2
+        if:  github.run_attempt > 1
+        run: |
+           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
+           echo "RUN NUMBER: ${{ github.run_number }}"
+           
+      - name: TEST 3
+        if:  github.run_attempt == 1
+        run: |
+           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
+           echo "RUN NUMBER: ${{ github.run_number }}"
+
+      - name: echo chommit from composite action
+        uses: ./.github/actions/setup-ci-env-vars
+
+      - name: Checkout code
+        run: jq --version
+        
       - name: Test output QUEUE_LOCKED
         id: check_queue
         run: |
