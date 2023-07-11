@@ -12,3 +12,30 @@ runs:
       - name: echo COMMIT
         run: echo "$COMMIT"
         shell: bash
+        
+      - name: RUN ATTEMPT AND NUMBER
+        shell: bash
+        run: |
+           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
+           echo "RUN NUMBER: ${{ github.run_number }}"
+
+      - name: TEST 1
+        if:  ${{ github.run_attempt > 1 }} 
+        shell: bash
+        run: |
+           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
+           echo "RUN NUMBER: ${{ github.run_number }}"
+
+      - name: TEST 2
+        shell: bash
+        if:  github.run_attempt > 1
+        run: |
+           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
+           echo "RUN NUMBER: ${{ github.run_number }}"
+           
+      - name: TEST 3
+        shell: bash
+        if:  github.run_attempt == 1
+        run: |
+           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
+           echo "RUN NUMBER: ${{ github.run_number }}"
