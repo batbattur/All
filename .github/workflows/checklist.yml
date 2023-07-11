@@ -1,6 +1,7 @@
 name: QA 
 on:
    pull_request: 
+   workflow_dispatch:
    push:
       branches:
          - master
@@ -17,6 +18,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: RUN ATTEMPT AND NUMBER
+        run: |
+           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
+           echo "RUN NUMBER: ${{ github.run_number }}"
 
       - name: Checkout code
         run: jq --version
