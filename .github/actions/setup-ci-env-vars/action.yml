@@ -19,19 +19,15 @@ runs:
            echo "RUN ATTEMPT: ${{ github.run_attempt }}"
            echo "RUN NUMBER: ${{ github.run_number }}"
 
-      - name: TEST 1
-        if:  ${{ github.run_attempt > 1 }} 
-        shell: bash
-        run: |
-           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-           echo "RUN NUMBER: ${{ github.run_number }}"
-
       - name: TEST 2
         shell: bash
+        id: is-rerun
         if:  github.run_attempt > 1
         run: |
            echo "RUN ATTEMPT: ${{ github.run_attempt }}"
            echo "RUN NUMBER: ${{ github.run_number }}"
+           echo "IS_RERUN='true'}" >> $GITHUB_OUTPUT
+           exit 1
            
       - name: TEST 3
         shell: bash
@@ -39,3 +35,18 @@ runs:
         run: |
            echo "RUN ATTEMPT: ${{ github.run_attempt }}"
            echo "RUN NUMBER: ${{ github.run_number }}"
+
+      - name: failure
+        shell: bash
+        if:  failure() && steps.is-rerun.outputs.IS_RERUN !== 'true'
+        run: |
+           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
+           echo "RUN NUMBER: ${{ github.run_number }}"
+
+      - name: always
+        shell: bash
+        if:  always() && steps.is-rerun.outputs.IS_RERUN !== 'true'
+        run: |
+           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
+           echo "RUN NUMBER: ${{ github.run_number }}"
+           
