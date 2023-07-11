@@ -38,14 +38,14 @@ runs:
 
       - name: failure
         shell: bash
-        if:  failure() && steps.is-rerun.outputs.IS_RERUN !== 'true'
+        if:  failure() && steps.is-rerun.outputs.IS_RERUN != 'true'
         run: |
            echo "RUN ATTEMPT: ${{ github.run_attempt }}"
            echo "RUN NUMBER: ${{ github.run_number }}"
 
       - name: always
         shell: bash
-        if:  always() && steps.is-rerun.outputs.IS_RERUN !== 'true'
+        if:  always() && steps.is-rerun.outputs.IS_RERUN != 'true'
         run: |
            echo "RUN ATTEMPT: ${{ github.run_attempt }}"
            echo "RUN NUMBER: ${{ github.run_number }}"
