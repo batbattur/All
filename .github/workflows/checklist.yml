@@ -24,6 +24,24 @@ jobs:
            echo "RUN ATTEMPT: ${{ github.run_attempt }}"
            echo "RUN NUMBER: ${{ github.run_number }}"
 
+      - name: TEST 1
+        if:  ${{ github.run_attempt > 1 }} 
+        run: |
+           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
+           echo "RUN NUMBER: ${{ github.run_number }}"
+
+      - name: TEST 2
+        if:  github.run_attempt > 1
+        run: |
+           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
+           echo "RUN NUMBER: ${{ github.run_number }}"
+           
+      - name: TEST 3
+        if:  github.run_attempt == 1
+        run: |
+           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
+           echo "RUN NUMBER: ${{ github.run_number }}"
+
       - name: Checkout code
         run: jq --version
         
