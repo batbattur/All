@@ -40,13 +40,11 @@ runs:
         shell: bash
         if:  failure() && steps.is-rerun.outputs.IS_RERUN != 'true'
         run: |
-           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-           echo "RUN NUMBER: ${{ github.run_number }}"
+           echo "RUNNING THE FAILURE CASE"
 
-      - name: always
+      - name: alwaysaaa
         shell: bash
         if:  always() && steps.is-rerun.outputs.IS_RERUN != 'true'
         run: |
-           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-           echo "RUN NUMBER: ${{ github.run_number }}"
+           echo "RUNNING THE ALWAYS CASE"
            
