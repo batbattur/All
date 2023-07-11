@@ -3,11 +3,11 @@ description: Set CI Environment Variables
 runs:
    using: 'composite'
    steps:        
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
-        shell: bash
+      # - name: Dump GitHub context
+      #   env:
+      #     GITHUB_CONTEXT: ${{ toJSON(github) }}
+      #   run: echo "$GITHUB_CONTEXT"
+      #   shell: bash
 
       - name: echo COMMIT
         run: echo "$COMMIT"
