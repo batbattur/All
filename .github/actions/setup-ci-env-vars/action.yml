@@ -25,7 +25,7 @@ runs:
         run: |
            echo "INSIDE CHECK ATTEMPT"
            echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-           echo "first_attempt=$(echo ${{ github.run_attempt }} == 1 | bc}" >> $GITHUB_OUTPUT
+           echo "first_attempt=$(echo ${{ github.run_attempt }} == 1 | bc)" >> $GITHUB_OUTPUT
 
       - name: check-attempt output
         shell: bash
