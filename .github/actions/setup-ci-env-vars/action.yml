@@ -41,7 +41,7 @@ runs:
 
       - name: failure
         shell: bash
-        if: ${{ needs.check-attempt.outputs.first_attempt == 'true' && failure() }}
+        if: ${{ steps.check-attempt.outputs.first_attempt == 'true' && failure() }}
         run: |
            echo "RUNNING THE FAILURE CASE"
 
