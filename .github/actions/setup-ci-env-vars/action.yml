@@ -48,7 +48,7 @@ runs:
         if:  github.run_attempt > 1
         run: |
            echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-           echo "is_rerun='true'" >> $GITHUB_ENV
+           echo "is_rerun=true" >> $GITHUB_ENV
            exit 1
 
       # - name: failure
