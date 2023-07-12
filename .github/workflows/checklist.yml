@@ -85,12 +85,12 @@ jobs:
            echo "RUN ATTEMPT: ${{ github.run_attempt }}"
            echo "RUN NUMBER: ${{ github.run_number }}"
            
-      - name: TEST 3
-        if:  github.run_attempt == 1
-        run: |
-           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-           echo "RUN NUMBER: ${{ github.run_number }}"
-           exit 1
+      # - name: TEST 3
+      #   if:  github.run_attempt == 1
+      #   run: |
+      #      echo "RUN ATTEMPT: ${{ github.run_attempt }}"
+      #      echo "RUN NUMBER: ${{ github.run_number }}"
+      #      exit 1
 
       - name: echo chommit from composite action
         uses: ./.github/actions/setup-ci-env-vars
