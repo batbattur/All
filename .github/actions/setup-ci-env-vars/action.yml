@@ -19,16 +19,19 @@ runs:
            echo "RUN ATTEMPT: ${{ github.run_attempt }}"
            echo "RUN NUMBER: ${{ github.run_number }}"
 
-      - name: TEST 2
+      - name: check-attempt
         shell: bash
-        id: is-rerun
-        if:  github.run_attempt > 1
+        id: check-attempt
         run: |
+           echo "INSIDE CHECK ATTEMPT"
            echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-           echo "RUN NUMBER: ${{ github.run_number }}"
-           echo "IS_RERUN='true'}" >> $GITHUB_OUTPUT
-           exit 1
-           
+           echo "first_attempt=$(echo ${{ github.run_attempt }} == 1 | bc)}" >> $GITHUB_OUTPUT
+
+      - name: check-attempt output
+        shell: bash
+        run: |
+           echo "CHECKING check-attempt output: ${{ steps.check-attempt.outputs.first_attempt }}"
+
       - name: TEST 3
         shell: bash
         if:  github.run_attempt == 1
@@ -38,13 +41,13 @@ runs:
 
       - name: failure
         shell: bash
-        if:  failure() && steps.is-rerun.outputs.IS_RERUN != 'true'
+        if: ${{ needs.check-attempt.outputs.first_attempt == 'true' && failure() }}
         run: |
            echo "RUNNING THE FAILURE CASE"
 
       - name: alwaysaaa
         shell: bash
-        if:  always() && steps.is-rerun.outputs.IS_RERUN != 'true'
+        if:  always()
         run: |
            echo "RUNNING THE ALWAYS CASE"
            
