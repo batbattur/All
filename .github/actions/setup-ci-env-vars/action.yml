@@ -27,6 +27,15 @@ runs:
            echo "RUN ATTEMPT: ${{ github.run_attempt }}"
            echo "first_attempt=$(echo ${{ github.run_attempt }} == 1 | bc)" >> $GITHUB_OUTPUT
 
+      - name: Exit if not the first attempt
+        if:  steps.check-attempt.outputs.first_attempt == 0
+        shell: bash
+        run: |
+           echo "INSIDE Exit if not the first attempt"
+           echo "EXITING"
+           exit 1
+
+
       - name: check-attempt output
         shell: bash
         run: |
