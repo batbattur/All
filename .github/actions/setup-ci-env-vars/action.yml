@@ -52,7 +52,7 @@ runs:
 
       - name: failure
         shell: bash
-        if: ${{ steps.check-attempt.outputs.first_attempt == 1 && failure() }}
+        if: steps.check-attempt.outputs.first_attempt == 1 && failure()
         run: |
            echo "RUNNING THE FAILURE CASE"
 
