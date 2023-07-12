@@ -30,7 +30,8 @@ runs:
       - name: check-attempt output
         shell: bash
         run: |
-           echo "CHECKING check-attempt output: ${{ steps.check-attempt.outputs.first_attempt }}"
+           echo "CHECKING check-attempt output: ${{ steps.check-attempt.outputs.first_attempt }}
+           echo ${{ steps.check-attempt.outputs.first_attempt }}
 
       - name: TEST 3
         shell: bash
