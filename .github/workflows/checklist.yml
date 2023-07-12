@@ -91,10 +91,10 @@ jobs:
         uses: ./.github/actions/setup-ci-env-vars
 
       - name: Deploy
-        if: (failure() || cancelled()) && steps.check_rerun.outputs.is_rerun != 'true'
+        if: (failure() || cancelled()) && env.is_rerun != 'true'
         run: |
            echo "hi"
-           echo ${{ steps.check_rerun.outputs.is_rerun }}
+           echo ${{ env.is_rerun }}
      
 #       - name: Dump GitHub context
 #         env:
