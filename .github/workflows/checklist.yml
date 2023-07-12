@@ -44,6 +44,12 @@ jobs:
 
       - name: Checkout code
         run: jq --version
+
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
         
   checklist_job1:
     needs: checklist_job
@@ -57,6 +63,11 @@ jobs:
         run: |
            echo "RUN ATTEMPT: ${{ github.run_attempt }}"
            echo "RUN NUMBER: ${{ github.run_number }}"
+
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
 
       - name: TEST 1
         if:  ${{ github.run_attempt > 1 }} 
