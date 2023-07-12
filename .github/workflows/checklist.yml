@@ -42,9 +42,6 @@ jobs:
            echo "RUN ATTEMPT: ${{ github.run_attempt }}"
            echo "RUN NUMBER: ${{ github.run_number }}"
 
-      - name: echo chommit from composite action
-        uses: ./.github/actions/setup-ci-env-vars
-
       - name: Checkout code
         run: jq --version
         
