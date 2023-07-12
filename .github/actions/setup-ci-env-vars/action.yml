@@ -19,29 +19,29 @@ runs:
            echo "RUN ATTEMPT: ${{ github.run_attempt }}"
            echo "RUN NUMBER: ${{ github.run_number }}"
 
-      - name: check-attempt
-        shell: bash
-        id: check-attempt
-        run: |
-           echo "INSIDE CHECK ATTEMPT"
-           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-           echo "first_attempt=$(echo ${{ github.run_attempt }} == 1 | bc)" >> $GITHUB_OUTPUT
+      # - name: check-attempt
+      #   shell: bash
+      #   id: check-attempt
+      #   run: |
+      #      echo "INSIDE CHECK ATTEMPT"
+      #      echo "RUN ATTEMPT: ${{ github.run_attempt }}"
+      #      echo "first_attempt=$(echo ${{ github.run_attempt }} == 1 | bc)" >> $GITHUB_OUTPUT
 
-      - name: Exit if not the first attempt
-        if:  steps.check-attempt.outputs.first_attempt == 0
-        shell: bash
-        run: |
-           echo "INSIDE Exit if not the first attempt"
-           echo "EXITING"
-           exit 1
+      # - name: Exit if not the first attempt
+      #   if:  steps.check-attempt.outputs.first_attempt == 0
+      #   shell: bash
+      #   run: |
+      #      echo "INSIDE Exit if not the first attempt"
+      #      echo "EXITING"
+      #      exit 1
 
 
-      - name: check-attempt output
-        shell: bash
-        run: |
-           echo "CHECKING check-attempt output:" ${{ steps.check-attempt.outputs.first_attempt }}
-           echo ${{ steps.check-attempt.outputs.first_attempt }}
-           exit 1
+      # - name: check-attempt output
+      #   shell: bash
+      #   run: |
+      #      echo "CHECKING check-attempt output:" ${{ steps.check-attempt.outputs.first_attempt }}
+      #      echo ${{ steps.check-attempt.outputs.first_attempt }}
+      #      exit 1
 
       - name: TEST 3
         shell: bash
@@ -52,7 +52,7 @@ runs:
 
       - name: failure
         shell: bash
-        if: steps.check-attempt.outputs.first_attempt == 1 && failure()
+        if: failure()
         run: |
            echo "RUNNING THE FAILURE CASE"
 
