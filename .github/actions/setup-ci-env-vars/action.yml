@@ -41,6 +41,7 @@ runs:
         run: |
            echo "CHECKING check-attempt output:" ${{ steps.check-attempt.outputs.first_attempt }}
            echo ${{ steps.check-attempt.outputs.first_attempt }}
+           exit 1
 
       - name: TEST 3
         shell: bash
