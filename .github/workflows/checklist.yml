@@ -90,6 +90,9 @@ jobs:
         id: check_rerun
         uses: ./.github/actions/setup-ci-env-vars
 
+      - name: Checkout code
+        run: exit 1
+
       - name: Deploy
         if: (failure() || cancelled()) && env.is_rerun != 'true'
         run: |
