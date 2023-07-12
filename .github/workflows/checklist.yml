@@ -95,6 +95,8 @@ jobs:
         run: |
            echo "hi"
            echo ${{ env.is_rerun }}
+           echo ${{ env.is_rerun == 'true' }}
+           echo ${{ env.is_rerun != 'true' }}
      
 #       - name: Dump GitHub context
 #         env:
