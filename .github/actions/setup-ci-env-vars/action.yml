@@ -9,15 +9,15 @@ runs:
       #   run: echo "$GITHUB_CONTEXT"
       #   shell: bash
 
-      - name: echo COMMIT
-        run: echo "$COMMIT"
-        shell: bash
+      # - name: echo COMMIT
+      #   run: echo "$COMMIT"
+      #   shell: bash
         
-      - name: RUN ATTEMPT AND NUMBER
-        shell: bash
-        run: |
-           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-           echo "RUN NUMBER: ${{ github.run_number }}"
+      # - name: RUN ATTEMPT AND NUMBER
+      #   shell: bash
+      #   run: |
+      #      echo "RUN ATTEMPT: ${{ github.run_attempt }}"
+      #      echo "RUN NUMBER: ${{ github.run_number }}"
 
       # - name: check-attempt
       #   shell: bash
@@ -45,20 +45,21 @@ runs:
 
       - name: TEST 3
         shell: bash
-        if:  github.run_attempt == 1
+        if:  github.run_attempt > 1
         run: |
            echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-           echo "RUN NUMBER: ${{ github.run_number }}"
+           echo "is_rerun='true'" >> $GITHUB_OUTPUT
+           exit 1
 
-      - name: failure
-        shell: bash
-        if: failure()
-        run: |
-           echo "RUNNING THE FAILURE CASE"
+      # - name: failure
+      #   shell: bash
+      #   if: failure()
+      #   run: |
+      #      echo "RUNNING THE FAILURE CASE"
 
-      - name: alwaysaaa
-        shell: bash
-        if:  always()
-        run: |
-           echo "RUNNING THE ALWAYS CASE"
+      # - name: alwaysaaa
+      #   shell: bash
+      #   if:  always()
+      #   run: |
+      #      echo "RUNNING THE ALWAYS CASE"
            

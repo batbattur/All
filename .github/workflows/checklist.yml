@@ -59,31 +59,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: RUN ATTEMPT AND NUMBER
-        if: github.run_attempt > 1
-        run: exit 1
+      # - name: RUN ATTEMPT AND NUMBER
+      #   if: github.run_attempt > 1
+      #   run: exit 1
 
-      - name: RUN ATTEMPT AND NUMBER
-        run: |
-           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-           echo "RUN NUMBER: ${{ github.run_number }}"
+      # - name: RUN ATTEMPT AND NUMBER
+      #   run: |
+      #      echo "RUN ATTEMPT: ${{ github.run_attempt }}"
+      #      echo "RUN NUMBER: ${{ github.run_number }}"
 
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
 
-      - name: TEST 1
-        if:  ${{ github.run_attempt > 1 }} 
-        run: |
-           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-           echo "RUN NUMBER: ${{ github.run_number }}"
-
-      - name: TEST 2
-        if:  github.run_attempt > 1
-        run: |
-           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-           echo "RUN NUMBER: ${{ github.run_number }}"
+      # - name: TEST 2
+      #   if:  github.run_attempt > 1
+      #   run: |
+      #      echo "RUN ATTEMPT: ${{ github.run_attempt }}"
+      #      echo "RUN NUMBER: ${{ github.run_number }}"
            
       # - name: TEST 3
       #   if:  github.run_attempt == 1
@@ -92,23 +86,12 @@ jobs:
       #      echo "RUN NUMBER: ${{ github.run_number }}"
       #      exit 1
 
-      - name: echo chommit from composite action
+      - name: check rerun
+        id: check_rerun
         uses: ./.github/actions/setup-ci-env-vars
 
-      - name: Checkout code
-        run: jq --version
-        
-      - name: Test output QUEUE_LOCKED
-        id: check_queue
-        run: |
-           echo "QUEUE_LOCKED=false" >> $GITHUB_OUTPUT
-           echo "QUEUE_LOCKED=true" >> $GITHUB_OUTPUT
-
-      - name: Echo QUEUE_LOCKED
-        run: echo "${{ steps.check_queue.outputs.QUEUE_LOCKED }}"
-
       - name: Deploy
-        if: steps.check_queue.outputs.QUEUE_LOCKED == 'false'
+        if: (failure() || cancelled()) && steps.check_rerun.outputs.is_rerun != 'true'
         run: echo "hi"
      
 #       - name: Dump GitHub context
