@@ -92,7 +92,9 @@ jobs:
 
       - name: Deploy
         if: (failure() || cancelled()) && steps.check_rerun.outputs.is_rerun != 'true'
-        run: echo "hi"
+        run: |
+           echo "hi"
+           echo ${{ steps.check_rerun.outputs.is_rerun }}
      
 #       - name: Dump GitHub context
 #         env:
