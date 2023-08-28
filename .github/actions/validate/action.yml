@@ -19,6 +19,9 @@ runs:
         shell: bash
         run: echo "VALIDATING EXPRESSION"
 
+      - name: PRINT EXPRESSION
+        run: echo ${{ inputs.validate }}
+        shell: bash
 
       - name: TEST
         shell: bash
