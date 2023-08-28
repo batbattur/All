@@ -19,6 +19,11 @@ runs:
         shell: bash
         run: echo "VALIDATING EXPRESSION"
 
+      - name: VALIDATING JUST EXPRESSION
+        if: ${{ inputs.validate }}
+        shell: bash
+        run: echo "VALIDATING JUST EXPRESSION"
+
       - name: PRINT EXPRESSION
         run: echo ${{ inputs.validate }}
         shell: bash
