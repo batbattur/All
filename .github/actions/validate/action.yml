@@ -14,29 +14,15 @@ runs:
         shell: bash
         run: echo "VALIDATING"
 
-      - name: VALIDATING EXPRESSION
+      - name: VALIDATING FULLY WRAPPED
+        if: ${{ inputs.validate == 'true' }}
+        shell: bash
+        run: echo "VALIDATING"
+
+      - name: VALIDATING WITH EXISITNG EXPRESSION
         if: ${{ inputs.validate }} == 'true'
         shell: bash
         run: echo "VALIDATING EXPRESSION"
-
-      - name: VALIDATING JUST EXPRESSION
-        if: ${{ inputs.validate }}
-        shell: bash
-        run: echo "VALIDATING JUST EXPRESSION"
-
-      - name: PRINT EXPRESSION
-        run: echo ${{ inputs.validate }}
-        shell: bash
-
-      - name: WEIRD EXPRESSION 1
-        if: false == 'true'
-        shell: bash
-        run: echo "WEIRD EXPRESSION 1"
-
-      - name: WEIRD EXPRESSION 2
-        if: ${{ inputs.validate }} == true
-        shell: bash
-        run: echo "WEIRD EXPRESSION 2"
 
       - name: TEST
         shell: bash
