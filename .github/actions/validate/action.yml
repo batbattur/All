@@ -28,6 +28,16 @@ runs:
         run: echo ${{ inputs.validate }}
         shell: bash
 
+      - name: WEIRD EXPRESSION 1
+        if: false == 'true'
+        shell: bash
+        run: echo "WEIRD EXPRESSION 1"
+
+      - name: WEIRD EXPRESSION 2
+        if: ${{ inputs.validate }} == true
+        shell: bash
+        run: echo "WEIRD EXPRESSION 2"
+
       - name: TEST
         shell: bash
         run: echo "TEST"
