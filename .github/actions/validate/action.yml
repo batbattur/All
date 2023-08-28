@@ -14,6 +14,12 @@ runs:
         shell: bash
         run: echo "VALIDATING"
 
+      - name: VALIDATING EXPRESSION
+        if: ${{ inputs.validate }} == 'true'
+        shell: bash
+        run: echo "VALIDATING EXPRESSION"
+
+
       - name: TEST
         shell: bash
         run: echo "TEST"
