@@ -4,7 +4,7 @@ on:
       inputs:
          validate:
             description: 'Validate deploys?'
-            required: false
+            required: true
             default: 'false'
             type: choice
             options:
