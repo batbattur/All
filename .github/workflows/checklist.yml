@@ -50,7 +50,6 @@ jobs:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
 
-        
   checklist_job1:
     runs-on: ubuntu-latest
     name: checklist_job1
@@ -80,8 +79,7 @@ jobs:
            echo ${{ env.is_rerun == 'true' }}
            echo ${{ env.is_rerun != 'true' }}
 
-
-  checklist_job12
+  checklist_job1:
     runs-on: ubuntu-latest
     name: checklist_job1
     steps:
