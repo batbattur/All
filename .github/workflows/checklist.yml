@@ -79,7 +79,7 @@ jobs:
            echo ${{ env.is_rerun == 'true' }}
            echo ${{ env.is_rerun != 'true' }}
 
-  checklist_job1:
+  checklist_job2:
     runs-on: ubuntu-latest
     name: checklist_job1
     steps:
