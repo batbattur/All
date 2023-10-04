@@ -19,36 +19,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: RUN ATTEMPT AND NUMBER
+      - name: Print run_id
         run: |
-           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-           echo "RUN NUMBER: ${{ github.run_number }}"
-
-      - name: TEST 1
-        if:  ${{ github.run_attempt > 1 }} 
-        run: |
-           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-           echo "RUN NUMBER: ${{ github.run_number }}"
-
-      - name: TEST 2
-        if:  github.run_attempt > 1
-        run: |
-           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-           echo "RUN NUMBER: ${{ github.run_number }}"
-           
-      - name: TEST 3
-        if:  github.run_attempt == 1
-        run: |
-           echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-           echo "RUN NUMBER: ${{ github.run_number }}"
-
-      - name: Checkout code
-        run: jq --version
-
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
+           echo ${{ github.run_id  }}
 
   checklist_job1:
     runs-on: ubuntu-latest
@@ -62,22 +35,17 @@ jobs:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
 
-      - name: Print TESTING
+      - name: Print run_id
         run: |
-           echo ${{ github.workflow  }}
-           echo ${{ github.ref }}
-           echo ${{ github.run_number }}
+           echo ${{ github.run_id  }}
 
-      - name: Checkout code
+      - name: Exit
         run: exit 1
 
       - name: Deploy
         if: failure()
         run: |
-           echo "hi"
-           echo ${{ env.is_rerun }}
-           echo ${{ env.is_rerun == 'true' }}
-           echo ${{ env.is_rerun != 'true' }}
+           echo "failed"
 
   checklist_job2:
     runs-on: ubuntu-latest
@@ -86,14 +54,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: sleep 180
-        run: echo "$GITHUB_CONTEXT"
-
-      - name: Print TESTING
+      - name: Print run_id
         run: |
-           echo ${{ github.workflow  }}
-           echo ${{ github.ref }}
-           echo ${{ github.run_number }}
+           echo ${{ github.run_id  }}
+
+      - name: sleep 180
+        run: sleep 180
 
       - name: Deploy
         if: cancelled()
