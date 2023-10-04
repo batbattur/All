@@ -52,80 +52,52 @@ jobs:
 
         
   checklist_job1:
-    needs: checklist_job
     runs-on: ubuntu-latest
     name: checklist_job1
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # - name: RUN ATTEMPT AND NUMBER
-      #   if: github.run_attempt > 1
-      #   run: exit 1
-
-      # - name: RUN ATTEMPT AND NUMBER
-      #   run: |
-      #      echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-      #      echo "RUN NUMBER: ${{ github.run_number }}"
-
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
 
-      # - name: TEST 2
-      #   if:  github.run_attempt > 1
-      #   run: |
-      #      echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-      #      echo "RUN NUMBER: ${{ github.run_number }}"
-           
-      # - name: TEST 3
-      #   if:  github.run_attempt == 1
-      #   run: |
-      #      echo "RUN ATTEMPT: ${{ github.run_attempt }}"
-      #      echo "RUN NUMBER: ${{ github.run_number }}"
-      #      exit 1
-
-      - name: check rerun
-        id: check_rerun
-        uses: ./.github/actions/setup-ci-env-vars
+      - name: Print TESTING
+        run: |
+           echo ${{ github.workflow  }}
+           echo ${{ github.ref }}
+           echo ${{ github.run_number }}
 
       - name: Checkout code
         run: exit 1
 
       - name: Deploy
-        if: (failure() || cancelled()) && env.is_rerun != 'true'
+        if: failure()
         run: |
            echo "hi"
            echo ${{ env.is_rerun }}
            echo ${{ env.is_rerun == 'true' }}
            echo ${{ env.is_rerun != 'true' }}
-     
-#       - name: Dump GitHub context
-#         env:
-#           GITHUB_CONTEXT: ${{ toJSON(github) }}
-#         run: echo "$GITHUB_CONTEXT"
 
-#       - name: Print TESTING
-#         run: |
-#            echo ${{ github.workflow  }}
-#            echo ${{ github.ref }}
-#            echo ${{ github.run_number }}
-#         shell: bash
-        
-#       - name: Print github.sha 
-#         run: echo ${{ github.sha }}
 
-#       - name: Print github.event.pull_request.head.sha
-#         run: echo ${{ github.event.pull_request.head.sha }}        
-        
-        
-#       - name: Get head commit sha from the push event and set it to push_head_commit env
-#         run: echo "push_head_commit=$(echo $COMMITS_JSON | jq ".[length - 2].id")" >> $GITHUB_ENV
-#         shell: bash
-#         env:
-#             COMMITS_JSON: ${{ toJSON(github.event.commits) }}
+  checklist_job12
+    runs-on: ubuntu-latest
+    name: checklist_job1
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-#       - name: Print sha of the head commit
-#         run: echo "$push_head_commit"
-#         shell: bash
+      - name: sleep 180
+        run: echo "$GITHUB_CONTEXT"
+
+      - name: Print TESTING
+        run: |
+           echo ${{ github.workflow  }}
+           echo ${{ github.ref }}
+           echo ${{ github.run_number }}
+
+      - name: Deploy
+        if: cancelled()
+        run: |
+           echo "this was cancelled"
