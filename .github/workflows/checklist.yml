@@ -23,6 +23,11 @@ jobs:
         run: |
            echo ${{ github.run_id  }}
 
+      - name: Deploy
+        if: cancelled()
+        run: |
+           echo "this was cancelled"
+
   checklist_job1:
     runs-on: ubuntu-latest
     name: checklist_job1
@@ -42,10 +47,11 @@ jobs:
       - name: Exit
         run: exit 1
 
-      - name: Deploy
+      - name: Cancel all other jobs on failure
         if: failure()
         run: |
-           echo "failed"
+           echo "cancel all other jobs"
+           gh run cancel ${{ github.run_id  }}
 
   checklist_job2:
     runs-on: ubuntu-latest
