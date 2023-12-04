@@ -44,6 +44,10 @@ jobs:
         run: |
            echo ${{ github.run_id  }}
 
+      - name: print job name
+        run: |
+           echo ${{ github.job }}
+
       - name: Exit
         run: exit 1
 
