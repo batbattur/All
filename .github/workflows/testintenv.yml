@@ -63,6 +63,10 @@ jobs:
       - name: echo chommit from composite action
         uses: ./.github/actions/setup-ci-env-vars
 
+      - name: print job name and run id
+        run: |
+           echo ${{ github.job }}
+           echo ${{ github.run_id  }}
         
         
 #       - name: Dump GitHub context

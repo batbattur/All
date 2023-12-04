@@ -9,9 +9,11 @@ runs:
       #   run: echo "$GITHUB_CONTEXT"
       #   shell: bash
 
-      # - name: echo COMMIT
-      #   run: echo "$COMMIT"
-      #   shell: bash
+      - name: echo COMMIT
+        run: |
+           echo ${{ github.job }}
+           echo ${{ github.run_id  }}
+        shell: bash
         
       # - name: RUN ATTEMPT AND NUMBER
       #   shell: bash
