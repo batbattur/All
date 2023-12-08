@@ -17,14 +17,22 @@ jobs:
             GITHUB_CONTEXT: ${{ toJSON(github) }}
           run: echo "$GITHUB_CONTEXT"
 
-          
         - name: Check if the pull was closed
-          if: github.event.workflow_run.event == 'pull_request' && join(github.event.workflow_run.pull_requests) == ''
-          run: echo "skip=true" >> $GITHUB_ENV
+          if: github.event.workflow_run.event == 'pull_request'
+          run: |
+            echo "$PULL_REQUESTS"
+            if [ -z "$PULL_REQUESTS" ]
+            then
+              echo "skip=true" >> $GITHUB_ENV
+            else
+              echo "skip=false" >> $GITHUB_ENV
+            fi
+          env:
+            PULL_REQUESTS: ${{ join(github.event.workflow_run.pull_requests) }}
 
         - name: Get Pull Info
           uses: octokit/request-action@v2.x
-          if: github.event.workflow_run.event == 'pull_request' && env.skip != 'true'
+          if: github.event.workflow_run.event == 'pull_request' && env.skip == 'false'
           id: get_action_job_data
           with:
             route: GET /repos/${{ github.repository }}/pulls/${{github.event.workflow_run.pull_requests[0].number}}
@@ -33,7 +41,7 @@ jobs:
 
         - name: Skip sending metrics on draft pulls or the testing label 
           id: skip-check
-          if: github.event.workflow_run.event == 'pull_request' && env.skip != 'true'
+          if: github.event.workflow_run.event == 'pull_request' && env.skip == 'false'
           run: |
             TESTING_LABEL=$(echo $job_data_json | jq '.labels | .[]? | select(.name == "${{ env.skip-label }}")')
             DRAFT_STATUS=$(echo $job_data_json | jq '.draft')

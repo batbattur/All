@@ -1,0 +1,3 @@
+[submodule "render-template"]
+	path = render-template
+	url = https://github.com/batbattur/render-template.git

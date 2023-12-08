@@ -1,0 +1,99 @@
+name: TEST
+on:
+   pull_request: 
+   push:
+      branches:
+         - master
+   workflow_dispatch:
+      inputs:
+         fast_deploy:
+            description: 'Fast deploy: skips psalm and tests.'
+            required: true
+            default: 'false'
+            type: choice
+            options:
+               - 'false'
+               - 'true'
+
+env:
+  COMMIT: ${{ github.sha }}
+
+jobs:
+  test1:
+    runs-on: ubuntu-latest
+    name: checklist_job1
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: echo COMMIT
+        run: echo "$COMMIT"
+        
+      - name: echo GITHUB_SHA
+        run: echo "$GITHUB_SHA"
+
+      - name: echo inputs.fast_deploy
+        if: github.event_name == 'workflow_dispatch' && inputs.fast_deploy
+        run: echo "${{ inputs.build_id }}"
+
+      - name: echo inputs.fast_deploy true
+        if: github.event_name == 'workflow_dispatch' && inputs.fast_deploy == 'true'
+        run: echo "${{ inputs.build_id }}"
+
+
+      - name: echo inputs.fast_deploy false
+        if: github.event_name == 'workflow_dispatch' && inputs.fast_deploy == 'false'
+        run: echo "${{ inputs.build_id }}"
+
+
+
+  test2:
+    runs-on: ubuntu-latest
+    name: checklist_job2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: echo COMMIT
+        run: echo "$COMMIT"
+        
+      - name: echo GITHUB_SHA
+        run: echo "$GITHUB_SHA"
+        
+      - name: echo chommit from composite action
+        uses: ./.github/actions/setup-ci-env-vars
+
+      - name: print job name and run id
+        run: |
+           echo ${{ github.job }}
+           echo ${{ github.run_id  }}
+        
+        
+#       - name: Dump GitHub context
+#         env:
+#           GITHUB_CONTEXT: ${{ toJSON(github) }}
+#         run: echo "$GITHUB_CONTEXT"
+
+#       - name: Print TESTING
+#         run: |
+#            echo ${{ github.workflow  }}
+#            echo ${{ github.ref }}
+#            echo ${{ github.run_number }}
+#         shell: bash
+        
+#       - name: Print github.sha 
+#         run: echo ${{ github.sha }}
+
+#       - name: Print github.event.pull_request.head.sha
+#         run: echo ${{ github.event.pull_request.head.sha }}        
+        
+        
+#       - name: Get head commit sha from the push event and set it to push_head_commit env
+#         run: echo "push_head_commit=$(echo $COMMITS_JSON | jq ".[length - 2].id")" >> $GITHUB_ENV
+#         shell: bash
+#         env:
+#             COMMITS_JSON: ${{ toJSON(github.event.commits) }}
+
+#       - name: Print sha of the head commit
+#         run: echo "$push_head_commit"
+#         shell: bash

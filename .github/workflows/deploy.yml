@@ -1,0 +1,23 @@
+name: DEPLOY
+on:
+   pull_request: 
+   push:
+      branches:
+         - master
+   workflow_dispatch:
+
+env:
+  COMMIT: ${{ github.sha }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: deploy
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: fast-deploy
+        uses: ./.github/actions/validate
+        with:
+          validate: 'true'

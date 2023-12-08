@@ -1,0 +1,28 @@
+name: FAST DEPLOY
+on:
+   workflow_dispatch:
+      inputs:
+         validate:
+            description: 'Validate deploys?'
+            required: true
+            default: 'false'
+            type: choice
+            options:
+               - 'false'
+               - 'true'
+
+env:
+  COMMIT: ${{ github.sha }}
+
+jobs:
+  fast-deploy:
+    runs-on: ubuntu-latest
+    name: fast-deploy
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: fast-deploy
+        uses: ./.github/actions/validate
+        with:
+          validate: ${{ inputs.validate }}

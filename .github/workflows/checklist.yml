@@ -1,6 +1,8 @@
 name: QA 
 on:
    pull_request: 
+      types: [opened, synchronize, reopened, edited]
+   workflow_dispatch:
    push:
       branches:
          - master
@@ -18,34 +20,66 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - name: Print run_id
+        run: |
+           echo ${{ github.run_id  }}
+
+      - name: Deploy
+        if: cancelled()
+        run: |
+           echo "this was cancellasdasded"
+
+  checklist_job1:
+    runs-on: ubuntu-latest
+    name: checklist_job1
+    steps:
       - name: Checkout code
-        run: jq --version
+        uses: actions/checkout@v2
 
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
 
-      - name: Print TESTING
+      - name: Print run_id
         run: |
-           echo ${{ github.workflow  }}
-           echo ${{ github.ref }}
-           echo ${{ github.run_number }}
-        shell: bash
-        
-      - name: Print github.sha 
-        run: echo ${{ github.sha }}
+           echo ${{ github.run_id  }}
 
-      - name: Print github.event.pull_request.head.sha
-        run: echo ${{ github.event.pull_request.head.sha }}        
-        
-        
-      - name: Get head commit sha from the push event and set it to push_head_commit env
-        run: echo "push_head_commit=$(echo $COMMITS_JSON | jq ".[length - 2].id")" >> $GITHUB_ENV
-        shell: bash
+      - name: print job name
+        run: |
+           echo ${{ github.job }}
+
+      - name: Exit
+        run: exit 1
+
+      - name: Cancel all other jobs on failure
+        if: failure()
+        run: |
+           echo "cancel all other jobs"
+           gh run cancel ${{ github.run_id  }}
         env:
-            COMMITS_JSON: ${{ toJSON(github.event.commits) }}
+           GH_TOKEN: ${{ github.token }}
 
-      - name: Print sha of the head commit
-        run: echo "$push_head_commit"
-        shell: bash
+  checklist_job2:
+    runs-on: ubuntu-latest
+    name: checklist_job1
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Print run_id
+        run: |
+           echo ${{ github.run_id  }}
+
+      - name: sleep 180
+        run: sleep 180
+
+      - name: Deploy
+        if: cancelled()
+        run: |
+           echo "this was cancelled"

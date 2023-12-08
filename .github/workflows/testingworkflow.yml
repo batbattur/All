@@ -1,0 +1,13 @@
+name: testinggg workflow
+on:
+   pull_request: 
+   push:
+   workflow_dispatch:
+
+jobs:
+  test1:
+    runs-on: ubuntu-latest
+    name: testinggg workflow
+    steps:
+      - name: Checkout code
+        run: whoami

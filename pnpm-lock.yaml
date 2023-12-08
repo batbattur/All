@@ -1,0 +1,18 @@
+lockfileVersion: '6.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+dependencies:
+  shelljs:
+    specifier: 0.3.0
+    version: 0.3.0
+
+packages:
+
+  /shelljs@0.3.0:
+    resolution: {integrity: sha512-Ny0KN4dyT8ZSCE0frtcbAJGoM/HTArpyPkeli1/00aYfm0sbD/Gk/4x7N2DP9QKGpBsiQH7n6rpm1L79RtviEQ==}
+    engines: {node: '>=0.8.0'}
+    hasBin: true
+    dev: false

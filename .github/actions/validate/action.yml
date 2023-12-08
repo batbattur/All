@@ -1,0 +1,29 @@
+name: validate
+description: validate
+inputs:
+  validate:
+    description: 'Should validate after deploying'
+    required: true
+    default: 'true'
+
+runs:
+   using: 'composite'
+   steps:
+      - name: VALIDATING
+        if: inputs.validate == 'true'
+        shell: bash
+        run: echo "VALIDATING"
+
+      - name: VALIDATING FULLY WRAPPED
+        if: ${{ inputs.validate == 'true' }}
+        shell: bash
+        run: echo "VALIDATING"
+
+      - name: VALIDATING WITH EXISITNG EXPRESSION
+        if: ${{ inputs.validate }} == 'true'
+        shell: bash
+        run: echo "BUG ON MASTER"
+
+      - name: TEST
+        shell: bash
+        run: echo "TEST"
