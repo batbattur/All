@@ -1,6 +1,7 @@
 name: QA 
 on:
    pull_request: 
+      types: [opened, synchronize, reopened, edited]
    workflow_dispatch:
    push:
       branches:
@@ -18,6 +19,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
 
       - name: Print run_id
         run: |
