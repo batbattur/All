@@ -32,7 +32,7 @@ jobs:
       - name: Deploy
         if: cancelled()
         run: |
-           echo "this was cancelled"
+           echo "this was cancellasdasded"
 
   checklist_job1:
     runs-on: ubuntu-latest
