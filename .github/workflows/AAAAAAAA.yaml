@@ -5,10 +5,6 @@ on:
 
 jobs:
    base-branch-change-rebuild-assets:
-      if: |
-         github.event.action == 'edited' &&
-         github.event.changes.base && !github.event.changes.body && !github.event.changes.title &&
-         github.event.changes.base.ref.from != 'master' && github.base_ref == 'master'
       runs-on: ubuntu-latest
       steps:
          - name: Checkout
