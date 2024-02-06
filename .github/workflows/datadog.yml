@@ -17,6 +17,10 @@ jobs:
             GITHUB_CONTEXT: ${{ toJSON(github) }}
           run: echo "$GITHUB_CONTEXT"
 
+        - name: testing
+          if: event.workflow_run.event == 'push' && event.workflow_run.pull_requests == '[]'
+          run: echo hi
+
         - name: Check if the pull was closed
           if: github.event.workflow_run.event == 'pull_request'
           run: |
