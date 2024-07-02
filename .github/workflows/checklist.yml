@@ -27,7 +27,8 @@ jobs:
 
       - name: Print run_id
         run: |
-           echo ${{ github.run_id  }}
+           pwd
+           echo ${{ github.workspace }}
 
       - name: Deploy
         if: cancelled()
